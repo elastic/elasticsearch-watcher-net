@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Watcher", "Nest.Watcher\Nest.Watcher.csproj", "{A82B203C-91A2-4FAC-BBD2-72EEABA74DA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Generation", "Code Generation", "{C3A16065-7C9D-4967-8EFE-DD3E1EDEF15E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.Watcher", "CodeGeneration\CodeGeneration.Watcher\CodeGeneration.Watcher.csproj", "{498AD3F5-F81A-4832-A5A7-A424A2E261A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{573AD714-1C30-4C6F-8397-60AB7DF53ABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Watcher.Tests.Unit", "Tests\Nest.Watcher.Tests.Unit\Nest.Watcher.Tests.Unit.csproj", "{7B0FB7D3-657B-47F3-9611-03FB75D763D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Watcher.Tests.Integration", "Tests\Nest.Watcher.Tests.Integration\Nest.Watcher.Tests.Integration.csproj", "{65E425DD-F7B2-46B2-B032-807F88984C82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{861B5546-8BED-4B7F-A0F1-44972ABEF585}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A82B203C-91A2-4FAC-BBD2-72EEABA74DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82B203C-91A2-4FAC-BBD2-72EEABA74DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82B203C-91A2-4FAC-BBD2-72EEABA74DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82B203C-91A2-4FAC-BBD2-72EEABA74DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{498AD3F5-F81A-4832-A5A7-A424A2E261A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498AD3F5-F81A-4832-A5A7-A424A2E261A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498AD3F5-F81A-4832-A5A7-A424A2E261A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498AD3F5-F81A-4832-A5A7-A424A2E261A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B0FB7D3-657B-47F3-9611-03FB75D763D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0FB7D3-657B-47F3-9611-03FB75D763D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0FB7D3-657B-47F3-9611-03FB75D763D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0FB7D3-657B-47F3-9611-03FB75D763D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E425DD-F7B2-46B2-B032-807F88984C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E425DD-F7B2-46B2-B032-807F88984C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E425DD-F7B2-46B2-B032-807F88984C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E425DD-F7B2-46B2-B032-807F88984C82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{498AD3F5-F81A-4832-A5A7-A424A2E261A9} = {C3A16065-7C9D-4967-8EFE-DD3E1EDEF15E}
+		{7B0FB7D3-657B-47F3-9611-03FB75D763D5} = {573AD714-1C30-4C6F-8397-60AB7DF53ABD}
+		{65E425DD-F7B2-46B2-B032-807F88984C82} = {573AD714-1C30-4C6F-8397-60AB7DF53ABD}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A82B203C-91A2-4FAC-BBD2-72EEABA74DA0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest</RootNamespace>
+    <AssemblyName>Nest.Watcher</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elasticsearch.Net">
+      <HintPath>..\..\dep-temp\Elasticsearch.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest">
+      <HintPath>..\..\dep-temp\Nest.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep-temp\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DispatchExtensions.Generated.cs" />
+    <Compile Include="Domain\ActionExecution\ActionExecutionState.cs" />
+    <Compile Include="Domain\ActionExecution\ExecutionResult.cs" />
+    <Compile Include="Domain\Action\Action.cs" />
+    <Compile Include="Domain\Condition\CompareCondition.cs" />
+    <Compile Include="Domain\ActionExecution\ActionExecutionMode.cs" />
+    <Compile Include="Domain\Transform\TransformBase.cs" />
+    <Compile Include="Domain\Transform\TransformContainer.cs" />
+    <Compile Include="Domain\Schedule\ScheduleBase.cs" />
+    <Compile Include="Domain\Schedule\ScheduleContainer.cs" />
+    <Compile Include="Domain\Trigger\ScheduleTriggerEvent.cs" />
+    <Compile Include="Domain\Trigger\TriggerEventBase.cs" />
+    <Compile Include="Domain\Trigger\TriggerEventContainer.cs" />
+    <Compile Include="Domain\Trigger\TriggerContainer.cs" />
+    <Compile Include="Domain\WatcherAuthentication.cs" />
+    <Compile Include="Domain\Action\LoggingAction.cs" />
+    <Compile Include="Domain\Action\SimulatedActions.cs" />
+    <Compile Include="Domain\Action\WebhookAction.cs" />
+    <Compile Include="Domain\Action\IndexAction.cs" />
+    <Compile Include="Domain\Action\EmailAction.cs" />
+    <Compile Include="Domain\WatcherHttpRequest.cs" />
+    <Compile Include="Domain\Condition\AlwaysCondition.cs" />
+    <Compile Include="Domain\Condition\ConditionBase.cs" />
+    <Compile Include="Domain\Condition\ConditionContainer.cs" />
+    <Compile Include="Domain\Condition\NeverCondition.cs" />
+    <Compile Include="Domain\Condition\ScriptCondition.cs" />
+    <Compile Include="Domain\Enums\Day.cs" />
+    <Compile Include="Domain\Enums\HttpMethod.cs" />
+    <Compile Include="Domain\Enums\Month.cs" />
+    <Compile Include="Domain\Enums\EmailPriority.cs" />
+    <Compile Include="Domain\Enums\ConnectionScheme.cs" />
+    <Compile Include="Domain\Input\InputBase.cs" />
+    <Compile Include="Domain\Input\InputContainer.cs" />
+    <Compile Include="Domain\Input\SimpleInput.cs" />
+    <Compile Include="Domain\WatcherExecutionQueue.cs" />
+    <Compile Include="Domain\Input\HttpInput.cs" />
+    <Compile Include="Domain\Input\SearchInput.cs" />
+    <Compile Include="Domain\RequestParametersExtensions.Generated.cs" />
+    <Compile Include="Domain\RequestParameters\RequestParameters.Generated.cs" />
+    <Compile Include="Domain\Responses\DeleteWatchResponse.cs" />
+    <Compile Include="Domain\Responses\ExecuteWatchResponse.cs" />
+    <Compile Include="Domain\Responses\WatcherStatsResponse.cs" />
+    <Compile Include="Domain\Responses\StopWatcherResponse.cs" />
+    <Compile Include="Domain\Responses\StartWatcherResponse.cs" />
+    <Compile Include="Domain\Responses\RestartWatcherResponse.cs" />
+    <Compile Include="Domain\Responses\PutWatchResponse.cs" />
+    <Compile Include="Domain\Responses\GetWatchResponse.cs" />
+    <Compile Include="Domain\Responses\WatcherInfoResponse.cs" />
+    <Compile Include="Domain\Transform\ChainTransform.cs" />
+    <Compile Include="Domain\Transform\ScriptTransform.cs" />
+    <Compile Include="Domain\Transform\SearchTransform.cs" />
+    <Compile Include="Domain\Schedule\DailySchedule.cs" />
+    <Compile Include="Domain\Schedule\HourlySchedule.cs" />
+    <Compile Include="Domain\Schedule\MonthlySchedule.cs" />
+    <Compile Include="Domain\Schedule\WeeklySchedule.cs" />
+    <Compile Include="Domain\Watch.cs" />
+    <Compile Include="Domain\WatchAcknowledgementState.cs" />
+    <Compile Include="Domain\WatcherVersion.cs" />
+    <Compile Include="Domain\WatchStatus.cs" />
+    <Compile Include="Domain\Input\IndicesOptions.cs" />
+    <Compile Include="Domain\Input\SearchInputRequest.cs" />
+    <Compile Include="Domain\Schedule\YearlySchedule.cs" />
+    <Compile Include="Domain\Trigger\ITriggerEvent.cs" />
+    <Compile Include="Domain\Trigger\TriggerBase.cs" />
+    <Compile Include="DSL\AcknowledgeWatchDescriptor.cs" />
+    <Compile Include="DSL\DeleteWatchDescriptor.cs" />
+    <Compile Include="DSL\StopWatcherDescriptor.cs" />
+    <Compile Include="DSL\StartWatcherDescriptor.cs" />
+    <Compile Include="DSL\RestartWatcherDescriptor.cs" />
+    <Compile Include="DSL\PutWatchDescriptor.cs" />
+    <Compile Include="DSL\GetWatchDescriptor.cs" />
+    <Compile Include="DSL\ExecuteWatchDescriptor.cs" />
+    <Compile Include="DSL\WatcherInfoDescriptor.cs" />
+    <Compile Include="DSL\WatcherStatsDescriptor.cs" />
+    <Compile Include="DSL\_Descriptors.Generated.cs" />
+    <Compile Include="DSL\_Requests.Generated.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Serialization\CompareConditionConverter.cs" />
+    <Compile Include="Serialization\ExecutionResultActionConverter.cs" />
+    <Compile Include="Serialization\SimpleInputConverter.cs" />
+    <Compile Include="Serialization\SimulatedActionsConverter.cs" />
+    <Compile Include="Serialization\ActionDictionaryConverter.cs" />
+    <Compile Include="WatcherExtensions-Delete.cs" />
+    <Compile Include="WatcherExtensions-Get.cs" />
+    <Compile Include="WatcherExtensions-Info.cs" />
+    <Compile Include="WatcherExtensions-Start.cs" />
+    <Compile Include="WatcherExtensions-Stop.cs" />
+    <Compile Include="WatcherExtensions-Stats.cs" />
+    <Compile Include="WatcherExtensions-Restart.cs" />
+    <Compile Include="WatcherExtensions-Put.cs" />
+    <Compile Include="WatcherExtensions-Execute.cs" />
+    <Compile Include="WatcherExtensions-Acknowledge.cs" />
+    <Compile Include="LowLevelExtensions.Generated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\Responses\AcknowledgeWatchResponse.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,20 @@
+{
+  "watcher.delete_watch": {
+    "documentation": "http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html",
+    "methods": [ "DELETE" ],
+    "url": {
+      "path": "/_watcher/watch/{id}",
+      "paths": [ "/_watcher/watch/{id}" ],
+      "parts": {
+        "id": {
+          "type" : "string",
+          "description" : "Watch ID",
+          "required" : true
+        }
+      },
+      "params": {
+      }
+    },
+    "body": null
+  }
+}

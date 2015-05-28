@@ -1,0 +1,59 @@
+@using System.Collections.Generic
+@using CodeGeneration.Watcher.Domain
+@using CodeGeneration.Watcher
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Linq.Expressions;
+using Elasticsearch.Net;
+
+//Generated of commit @Model.Commit
+
+namespace Nest
+{
+	
+	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
+	{
+		
+	<text>
+	///<summary>Request parameters descriptor for @method.FullName
+	///<pre>
+	///@method.Documentation
+	///</pre>
+	///</summary>
+	public class @method.QueryStringParamName : FluentRequestParameters<@method.QueryStringParamName> 
+	{
+	  @foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+	  {
+		  var mm = kv.Key;
+		  var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
+		  var setter = mm;
+		  var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
+		  if (isFields && fieldType.Contains("string"))
+		  {
+			  fieldType = "IEnumerable<object>";
+			  setter = mm + ".Select(f=>(object)f)";
+		  }
+		  else if (mm.Contains("field") && fieldType.Contains("string"))
+		  {
+			  fieldType = "object";
+		  }
+		<text>
+		internal @Raw(fieldType) _@(kv.Key) { get; set; }
+		///<summary>@kv.Value.Description</summary>
+		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm)
+		{
+			this._@(mm) = @Raw(setter);
+			this.AddQueryString("@kv.Value.OriginalQueryStringParamName", this._@mm);
+			return this;
+		}
+		</text>
+	  }
+	}
+	</text>
+	}
+	
+}
+ 
