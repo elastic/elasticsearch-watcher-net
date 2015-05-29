@@ -11,21 +11,21 @@ type ProjectName(msbuild: string) =
     member this.NugetDescription = 
         match this.Nuget.ToLowerInvariant() with
         | f when f = "nest.watcher" -> 
-            Some "Watcher is a plugin for Elasticsearch that provides alerting and notification based on changes in your data. This nuget extends NEST allowing you to interface with the watcher plugin"
+            Some "Watcher is a plugin for Elasticsearch that provides alerting and notifications based on changes in your data. This NuGet package extends NEST, allowing you to interface with the Watcher plugin."
         | _ -> 
             None
 
 type DotNetFramework = 
     | NET40 
-    //| NET45 
+    | NET45 
     static member All = [
         NET40
-        //; NET45
+        ; NET45
     ] 
     member this.Identifier = 
         match this with
         | NET40 -> { MSBuild = "v4.0"; Nuget = "net40"; }
-        //| NET45 -> { MSBuild = "v4.5"; Nuget = "net45"; }
+        | NET45 -> { MSBuild = "v4.5"; Nuget = "net45"; }
     
 type DotNet40Project =
     | NestWatcher

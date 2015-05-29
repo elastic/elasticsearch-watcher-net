@@ -31,15 +31,14 @@ type Build() =
                 | DotNet40Project net40 -> 
                     let net40dir = sprintf "%s/net40" outputFolder
                     CopyDir net40dir srcFolder allFiles
-                //| DotNet45Project net45 -> trace ""
-            //| NET45 ->
-            //    let net45dir = sprintf "%s/net45" outputFolder
-            //    CopyDir net45dir srcFolder allFiles
+            | NET45 ->
+                let net45dir = sprintf "%s/net45" outputFolder
+                CopyDir net45dir srcFolder allFiles
 
     static let toTarget (f: DotNetFramework) =
         match f with 
         | NET40 -> "Rebuild"
-        //| NET45 -> "Rebuild"
+        | NET45 -> "Rebuild"
         
     static member Compile(framework: DotNetFramework) =
         let f = framework.Identifier

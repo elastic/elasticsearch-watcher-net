@@ -3,23 +3,31 @@
 	<metadata>
 		<id>NEST.Watcher</id>
 		<version>1.0.0-beta1</version>
-		<title>NEST.Watcher - Elasticsearch Client</title>
+		<title>NEST.Watcher - Elasticsearch Watcher extensions for NEST</title>
 		<authors>Elasticsearch Inc. and contributors</authors>
 		<owners>Elasticsearch Inc.</owners>
 		<iconUrl>http://nest.azurewebsites.net/images/nest-nuget-icon.png</iconUrl>
-		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
-		<projectUrl>https://github.com/elasticsearch/elasticsearch-watcher-net</projectUrl>
-		<summary>Strongly typed interface to Elasticsearch's watcher plugin. </summary>
+		<licenseUrl>https://github.com/elastic/elasticsearch-watcher-net/blob/master/LICENSE.txt</licenseUrl>
+		<projectUrl>https://github.com/elastic/elasticsearch-watcher-net</projectUrl>
+		<summary>Strongly typed interface to Elasticsearch's Watcher plugin</summary>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Watcher is a plugin for Elasticsearch that provides alerting and notification based on changes in your data. This nuget extends NEST allowing you to interface with the watcher plugin</description>
+		<description>Watcher is a plugin for Elasticsearch that provides alerting and notifications based on changes in your data. This NuGet package extends NEST, allowing you to interface with the Watcher plugin.</description>
 		<dependencies>
 			<dependency id="NEST" version="1.5.1"/>
 		</dependencies>
 		<tags>elasticsearch elastic search lucene nest watch watcher</tags>
 	</metadata>
 	<files>
+		<file src="output\Nest.Watcher\net40\Nest.Watcher.dll" target="lib"/>
+		<file src="output\Nest.Watcher\net40\Nest.Watcher.pdb" target="lib"/>
+		<file src="output\Nest.Watcher\net40\Nest.Watcher.XML" target="lib"/>
+		
 		<file src="output\Nest.Watcher\net40\Nest.Watcher.dll" target="lib\net40"/>
 		<file src="output\Nest.Watcher\net40\Nest.Watcher.pdb" target="lib\net40"/>
 		<file src="output\Nest.Watcher\net40\Nest.Watcher.XML" target="lib\net40"/>
+
+		<file src="output\Nest.Watcher\net45\Nest.Watcher.dll" target="lib\net45"/>
+		<file src="output\Nest.Watcher\net45\Nest.Watcher.pdb" target="lib\net45"/>
+		<file src="output\Nest.Watcher\net45\Nest.Watcher.XML" target="lib\net45"/>
 	</files>
 </package>

@@ -3,7 +3,7 @@ using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Nest.Watcher")]
 [assembly: AssemblyCopyrightAttribute("Elasticsearch 2015")]
-[assembly: AssemblyDescriptionAttribute("Watcher is a plugin for Elasticsearch that provides alerting and notification based on changes in your data. This nuget extends NEST allowing you to interface with the watcher plugin")]
+[assembly: AssemblyDescriptionAttribute("Watcher is a plugin for Elasticsearch that provides alerting and notifications based on changes in your data. This NuGet package extends NEST, allowing you to interface with the Watcher plugin.")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("1.0.0")]

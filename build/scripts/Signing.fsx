@@ -57,7 +57,7 @@ type Sign() =
             match p with
             | DotNet40Project net40 -> 
                 validate net40dll name
-                //validate net45dll name
+                validate net45dll name
 
     static member CreateKeysIfAbsent() =
         if not (directoryExists Paths.KeysFolder) then CreateDir Paths.KeysFolder
