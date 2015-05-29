@@ -39,14 +39,8 @@ type Build() =
     static let toTarget (f: DotNetFramework) =
         match f with 
         | NET40 -> "Rebuild"
-        //This was an optimization in the nest repos to not build ALL the projects twice here we dont care
-        //When you add back to NET45 just make it do rebuild as well :)
-        //| NET40 -> 
-        //    DotNet40Project.All
-        //    |> List.map(fun p-> (DotNet40Project p).ProjectName)
-        //    |> List.map (fun n -> sprintf "%s:Rebuild" n.MSBuild)
-        //    |> String.concat ";"
-    
+        //| NET45 -> "Rebuild"
+        
     static member Compile(framework: DotNetFramework) =
         let f = framework.Identifier
         let properties = msbuildProperties |> List.append [("TargetFrameworkVersion", f.MSBuild)] 
