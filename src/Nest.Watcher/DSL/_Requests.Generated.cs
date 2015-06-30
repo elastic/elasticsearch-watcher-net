@@ -63,6 +63,14 @@ namespace Nest
 	///</summary>
 	public partial class ExecuteWatchRequest 
 			{
+		
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public bool Debug 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("debug"); } 
+			set { this.Request.RequestParameters.AddQueryString("debug", value); }
+		}
+		
 	}
 	
 		
@@ -131,6 +139,14 @@ namespace Nest
 	///</summary>
 	public partial class WatcherStatsRequest 
 			{
+		
+		///<summary>Controls what additional stat metrics should be include in the response</summary>
+		public Metric Metric 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Metric>("metric"); } 
+			set { this.Request.RequestParameters.AddQueryString("metric", value); }
+		}
+		
 	}
 	
 		

@@ -238,7 +238,7 @@ namespace CodeGeneration.Watcher
 
 		public static void GenerateEnums(RestApiSpec model)
 		{
-			var targetFile = _nestWatcherFolder + @"Domain\Enums.Generated.cs";
+			var targetFile = _nestWatcherFolder + @"Domain\Enums\Enums.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"Enums.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}

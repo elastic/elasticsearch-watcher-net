@@ -36,7 +36,7 @@ namespace Nest
 		foreach(var gen in generate)
 		{
 		<text>
-		internal static @Raw(gen.Returns) @(Raw(gen.Name))(this IElasticsearchClient client, ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
+		internal static @Raw(gen.Returns) @(Raw(gen.Name))(this IElasticsearchClient client, WatcherPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -64,6 +64,10 @@ namespace Nest
 					<text>if (@Raw(string.Join(" && ", dispatch.IfChecks)))
 						return client.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
+                        else
+                        {
+					<text>return client.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>           
+                        }
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)
 					{
@@ -74,6 +78,11 @@ namespace Nest
 			}
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.@(endpoint.CsharpMethodName)() into any of the following paths: \r\n - @string.Join("\\r\\n - ", endpoint.Url.Paths)");
+		}
+
+		internal static @Raw(gen.Returns) @(Raw(gen.Name))(this IElasticsearchClient client, ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
+		{
+			return @(Raw(gen.Name))(client, (WatcherPathInfo<@peek.QueryStringParamName>)pathInfo @if (endpoint.Body != null) {<text>, body</text>});
 		}
 		</text>
 	} 

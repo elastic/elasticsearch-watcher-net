@@ -57,6 +57,7 @@
     <Compile Include="Domain\Action\Action.cs" />
     <Compile Include="Domain\Condition\CompareCondition.cs" />
     <Compile Include="Domain\ActionExecution\ActionExecutionMode.cs" />
+    <Compile Include="Domain\Enums\Enums.Generated.cs" />
     <Compile Include="Domain\Transform\TransformBase.cs" />
     <Compile Include="Domain\Transform\TransformContainer.cs" />
     <Compile Include="Domain\Schedule\ScheduleBase.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="LowLevelExtensions.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Responses\AcknowledgeWatchResponse.cs" />
+    <Compile Include="WatcherPathInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />

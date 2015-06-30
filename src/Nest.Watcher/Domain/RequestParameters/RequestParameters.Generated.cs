@@ -69,6 +69,16 @@ namespace Nest
 	///</summary>
 	public class ExecuteWatchRequestParameters : FluentRequestParameters<ExecuteWatchRequestParameters> 
 	{
+		
+		internal bool _debug { get; set; }
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public ExecuteWatchRequestParameters Debug(bool debug)
+		{
+			this._debug = debug;
+			this.AddQueryString("debug", this._debug);
+			return this;
+		}
+		
 	}
 	
 	
@@ -139,6 +149,16 @@ namespace Nest
 	///</summary>
 	public class WatcherStatsRequestParameters : FluentRequestParameters<WatcherStatsRequestParameters> 
 	{
+		
+		internal Metric _metric { get; set; }
+		///<summary>Controls what additional stat metrics should be include in the response</summary>
+		public WatcherStatsRequestParameters Metric(Metric metric)
+		{
+			this._metric = metric;
+			this.AddQueryString("metric", this._metric);
+			return this;
+		}
+		
 	}
 	
 	

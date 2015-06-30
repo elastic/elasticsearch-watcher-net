@@ -69,6 +69,14 @@ namespace Nest
 	{
 		
 	
+
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public ExecuteWatchDescriptor Debug(bool debug = true)
+		{
+			this.Request.RequestParameters.Debug(debug);
+			return this;
+		}
+		
 	
 	}
 	
@@ -155,6 +163,14 @@ namespace Nest
 	{
 		
 	
+
+		///<summary>Controls what additional stat metrics should be include in the response</summary>
+		public WatcherStatsDescriptor Metric(Metric metric)
+		{
+			this.Request.RequestParameters.Metric(metric);
+			return this;
+		}
+		
 	
 	}
 	

@@ -66,6 +66,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="paket.references" />
+    <None Include="Views\Enums.Generated.cshtml" />
     <None Include="Views\LowLevelExtensions.Generated.cshtml" />
     <None Include="Views\DispatchExtensions.Generated.cshtml" />
     <None Include="Views\RequestParameters.Generated.cshtml" />
