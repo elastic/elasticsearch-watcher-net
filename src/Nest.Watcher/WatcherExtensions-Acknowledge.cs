@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse>(
 				request,
-				(p, d) => client.Raw.WatcherAckWatch<AcknowledgeWatchResponse>(p.Id)
+				(p, d) => client.Raw.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse, IAcknowledgeWatchResponse>(
 				request,
-				(p, d) => client.Raw.WatcherAckWatchAsync<AcknowledgeWatchResponse>(p.Id)
+				(p, d) => client.Raw.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p)
 			);
 		}
 	}

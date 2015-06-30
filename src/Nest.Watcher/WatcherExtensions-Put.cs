@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<IPutWatchRequest, PutWatchRequestParameters, PutWatchResponse>(
 				request,
-				(p, d) => client.Raw.WatcherPutWatch<PutWatchResponse>(d.Name, d)
+				(p, d) => client.Raw.WatcherPutWatchDispatch<PutWatchResponse>(p, d)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<IPutWatchRequest, PutWatchRequestParameters, PutWatchResponse, IPutWatchResponse>(
 				request,
-			    (p, d) => client.Raw.WatcherPutWatchAsync<PutWatchResponse>(p.Name, d)
+			    (p, d) => client.Raw.WatcherPutWatchDispatchAsync<PutWatchResponse>(p, d)
 			);
 		}
 	}
