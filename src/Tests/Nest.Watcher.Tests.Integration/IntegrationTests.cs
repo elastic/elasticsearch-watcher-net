@@ -17,7 +17,9 @@ namespace Nest.Watcher.Tests.Integration
 			{
 				var url = Environment.GetEnvironmentVariable("WATCHER_TEST_URI") ?? "http://localhost:9200";
 				var uri = new Uri(url);
-				var settings = new ConnectionSettings(uri).PrettyJson();
+				var settings = new ConnectionSettings(uri)
+					.PrettyJson()
+					.ExposeRawResponse();
 				var client = new ElasticClient(settings);
 				return client;
 			}

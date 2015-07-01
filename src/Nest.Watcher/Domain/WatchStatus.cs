@@ -9,7 +9,13 @@ namespace Nest
 	[JsonObject]
 	public class WatchStatus
 	{
+		[JsonProperty("actions")]
+		public Dictionary<string, ActionStatus> Actions { get; set; }
+	}
+
+	public class ActionStatus
+	{
 		[JsonProperty("ack")]
-		public WatchAcknowledgementState AcknowledgementState { get; set; }
+		public WatchAcknowledgementState Acknowledgement { get; set; }
 	}
 }

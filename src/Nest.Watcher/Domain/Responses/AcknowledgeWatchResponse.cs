@@ -9,7 +9,7 @@ namespace Nest
 {
 	public interface IAcknowledgeWatchResponse : IResponse
 	{
-		[JsonProperty("status")]
+		[JsonProperty("_status")]
 		WatchStatus Status { get; }
 	}
 
