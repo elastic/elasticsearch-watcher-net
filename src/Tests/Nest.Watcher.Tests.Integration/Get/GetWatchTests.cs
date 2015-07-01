@@ -48,18 +48,20 @@ namespace Nest.Watcher.Tests.Integration.Get
 			response.ConnectionStatus.HttpStatusCode.Should().Be(200);
 			response.Found.Should().BeTrue();
 			response.Id.Should().Be(expectedId);
-			response.Version.Should().Be(1);
+			response.Status.Should().NotBeNull();
+			response.Status.Actions.Should().NotBeEmpty();
+			var testIndex = response.Status.Actions["test_index"];
+			testIndex.Acknowledgement.Should().NotBeNull();
+			testIndex.Acknowledgement.Timestamp.Should().NotBeNull();
+			testIndex.Acknowledgement.State.Should().Be("awaits_successful_execution");
 			response.Watch.Should().NotBeNull();
 			response.Watch.Trigger.Should().NotBeNull();
 			response.Watch.Trigger.Schedule.Should().NotBeNull();
 			response.Watch.Condition.Should().NotBeNull();
 			response.Watch.Input.Should().NotBeNull();
-			response.Watch.Status.Should().NotBeNull();
 			response.Watch.Actions.Should().NotBeEmpty();
 			response.Watch.Actions.Count().Should().Be(1);
-			//response.Watch.Status.AcknowledgementState.Should().NotBeNull();
-			//response.Watch.Status.AcknowledgementState.State.Should().Be("awaits_execution");
-			//response.Watch.Status.AcknowledgementState.Timestamp.Should().NotBeNullOrEmpty();
+
 		}
 
 		private void AssertMissing(IGetWatchResponse response, string expectedId)

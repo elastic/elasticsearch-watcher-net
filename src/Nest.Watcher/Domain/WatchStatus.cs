@@ -9,6 +9,9 @@ namespace Nest
 	[JsonObject]
 	public class WatchStatus
 	{
+		[JsonProperty("version")]
+		public int? Version { get; set; }
+	
 		[JsonProperty("actions")]
 		public Dictionary<string, ActionStatus> Actions { get; set; }
 	}

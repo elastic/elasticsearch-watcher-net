@@ -19,7 +19,7 @@ namespace Nest
 
 		public IdPathBase(string watchId)
 		{
-
+			this.Id = watchId;
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)

@@ -12,10 +12,13 @@ namespace Nest
 	{
 		[JsonProperty("found")]
 		bool Found { get; }
+		
 		[JsonProperty("_id")]
 		string Id { get; }
-		[JsonProperty("_version")]
-		int Version { get; }
+		
+		[JsonProperty("_status")]
+		WatchStatus Status { get; }
+
 		[JsonProperty("watch")]
 		Watch Watch { get; }
 
@@ -25,7 +28,7 @@ namespace Nest
 	{
 		public bool Found { get; internal set; }
 		public string Id { get; internal set; }
-		public int Version { get; internal set; }
+		public WatchStatus Status { get; internal set; }
 		public Watch Watch { get; internal set; }
 	}
 }
