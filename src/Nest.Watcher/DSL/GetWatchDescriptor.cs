@@ -12,7 +12,7 @@ namespace Nest
 	{
 	}
 
-	public partial class GetWatchRequest : WatchIdPathBase<GetWatchRequestParameters>, IGetWatchRequest
+	public partial class GetWatchRequest : IdPathBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		public GetWatchRequest(string id) : base(id)
 		{
@@ -33,7 +33,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("WatcherGetWatch")]
-	public partial class GetWatchDescriptor : WatchIdPathDescriptor<GetWatchDescriptor, GetWatchRequestParameters>, IGetWatchRequest
+	public partial class GetWatchDescriptor : IdPathDescriptor<GetWatchDescriptor, GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetWatchRequestParameters> pathInfo)
 		{

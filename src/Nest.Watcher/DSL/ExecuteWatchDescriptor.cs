@@ -59,7 +59,7 @@ namespace Nest
 		SimulatedActions SimulatedActions { get; set; }
 	}
 
-	public partial class ExecuteWatchRequest : WatchIdPathBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchRequest : IdPathBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		public ExecuteWatchRequest(string watchId) : base(watchId) { }
 
@@ -92,7 +92,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("WatcherExecuteWatch")]
-	public partial class ExecuteWatchDescriptor : WatchIdPathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchDescriptor : IdPathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		private IExecuteWatchRequest Self { get { return this; }}
 

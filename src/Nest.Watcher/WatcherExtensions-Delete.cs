@@ -12,7 +12,7 @@ namespace Nest
 		public static IDeleteWatchResponse DeleteWatch(this IElasticClient client, string watchId, Func<DeleteWatchDescriptor, DeleteWatchDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new DeleteWatchDescriptor().WatchId(watchId));
+			var descriptor = selector(new DeleteWatchDescriptor().Id(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<DeleteWatchDescriptor, DeleteWatchRequestParameters, DeleteWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherDeleteWatchDispatch<DeleteWatchResponse>(p)
@@ -30,7 +30,7 @@ namespace Nest
 		public static Task<IDeleteWatchResponse> DeleteWatchAsync(this IElasticClient client, string watchId, Func<DeleteWatchDescriptor, DeleteWatchDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new DeleteWatchDescriptor().WatchId(watchId));
+			var descriptor = selector(new DeleteWatchDescriptor().Id(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<DeleteWatchDescriptor, DeleteWatchRequestParameters, DeleteWatchResponse, IDeleteWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherDeleteWatchDispatchAsync<DeleteWatchResponse>(p)

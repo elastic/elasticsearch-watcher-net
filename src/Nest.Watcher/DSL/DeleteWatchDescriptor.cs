@@ -10,7 +10,7 @@ namespace Nest
 	{
 	}
 
-	public partial class DeleteWatchRequest : WatchIdPathBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
+	public partial class DeleteWatchRequest : IdPathBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		public DeleteWatchRequest(string watchId) : base(watchId)
 		{
@@ -31,7 +31,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("WatcherDeleteWatch")]
-	public partial class DeleteWatchDescriptor : WatchIdPathDescriptor<DeleteWatchDescriptor, DeleteWatchRequestParameters>, IDeleteWatchRequest
+	public partial class DeleteWatchDescriptor : IdPathDescriptor<DeleteWatchDescriptor, DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteWatchRequestParameters> pathInfo)
 		{

@@ -34,7 +34,7 @@ namespace Nest
 		IDictionary<string, IAction> Actions { get; set; }
 	}
 
-	public partial class PutWatchRequest : WatchIdPathBase<PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchRequest : IdPathBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		public PutWatchRequest(string watchId) : base(watchId) { }
 
@@ -67,7 +67,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("WatcherPutWatch")]
-	public partial class PutWatchDescriptor : WatchIdPathDescriptor<PutWatchDescriptor, PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchDescriptor : IdPathDescriptor<PutWatchDescriptor, PutWatchRequestParameters>, IPutWatchRequest
 	{
 		private IPutWatchRequest Self { get { return this; } }
 		IDictionary<string, object> IPutWatchRequest.Metadata  { get; set; }
