@@ -15,7 +15,7 @@ namespace Nest
 			var descriptor = selector(new AcknowledgeWatchDescriptor().WatchId(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse>(
 				descriptor,
-				(p, d) => client.Raw.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p)
+				(p, d) => client.Raw.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p, watchId, ((IAcknowledgeWatchRequest)d).ActionId)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse>(
 				request,
-				(p, d) => client.Raw.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p)
+				(p, d) => client.Raw.WatcherAckWatchDispatch<AcknowledgeWatchResponse>(p, request.WatchId, request.ActionId)
 			);
 		}
 
@@ -33,7 +33,7 @@ namespace Nest
 			var descriptor = selector(new AcknowledgeWatchDescriptor().WatchId(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse, IAcknowledgeWatchResponse>(
 				descriptor,
-				(p, d) => client.Raw.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p) 
+				(p, d) => client.Raw.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p, watchId, ((IAcknowledgeWatchRequest)d).ActionId) 
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<IAcknowledgeWatchRequest, AcknowledgeWatchRequestParameters, AcknowledgeWatchResponse, IAcknowledgeWatchResponse>(
 				request,
-				(p, d) => client.Raw.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p)
+				(p, d) => client.Raw.WatcherAckWatchDispatchAsync<AcknowledgeWatchResponse>(p, request.WatchId, request.ActionId)
 			);
 		}
 	}

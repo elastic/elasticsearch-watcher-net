@@ -11,6 +11,7 @@ namespace Nest
 	{
 		public WatcherPathInfo(ElasticsearchPathInfo<TParameters> elasticsearchPathInfo)
 		{
+			this.HttpMethod = elasticsearchPathInfo.HttpMethod;
 			this.Id = elasticsearchPathInfo.Id;
 			this.Name = elasticsearchPathInfo.Name;
 		}

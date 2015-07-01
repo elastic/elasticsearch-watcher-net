@@ -16,11 +16,6 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 	{
 		public Metric Metric { get; set; }
-
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{
-			OptionalMetricRouteParameters.SetRouteParameters(this, settings, pathInfo);
-		}
 	}
 
 	public abstract class OptionalMetricPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>, IOptionalMetricPath<TParameters>
@@ -35,25 +30,6 @@ namespace Nest
 		{
 			Self.Metric = metric;
 			return (TDescriptor)this;
-		}
-
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{
-			OptionalMetricRouteParameters.SetRouteParameters(this, settings, pathInfo);
-		}
-	}
-
-	internal static class OptionalMetricRouteParameters
-	{
-		public static void SetRouteParameters<TParameters>(
-			IOptionalMetricPath<TParameters> path,
-			IConnectionSettingsValues settings, 
-			ElasticsearchPathInfo<TParameters> pathInfo)
-			where TParameters : IRequestParameters, new()
-		{
-			var watcherPathInfo = new WatcherPathInfo<TParameters>(pathInfo);
-			if (path.Metric != null)
-				watcherPathInfo.Metric = path.Metric;
 		}
 	}
 }

@@ -23,11 +23,6 @@ namespace Nest
 
 		public string WatchId { get; set; }
 		public string ActionId { get; set; }
-
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{
-			WatchIdOptionalActionIdRouteParameters.SetRouteParameters(this, settings, pathInfo);
-		}
 	}
 
 	public abstract class WatchIdOptionalActionIdPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>, IWatchIdOptionalActionIdPath<TParameters>
@@ -49,28 +44,6 @@ namespace Nest
 		{
 			Self.ActionId = actionId;
 			return (TDescriptor)this;
-		}
-
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{
-			WatchIdOptionalActionIdRouteParameters.SetRouteParameters(this, settings, pathInfo);
-		}
-	}
-
-	internal static class WatchIdOptionalActionIdRouteParameters
-	{
-		public static void SetRouteParameters<TParameters>(
-			IWatchIdOptionalActionIdPath<TParameters> path,
-			IConnectionSettingsValues settings,
-			ElasticsearchPathInfo<TParameters> pathInfo)
-			where TParameters : IRequestParameters, new()
-		{
-			var watcherPathInfo = new WatcherPathInfo<TParameters>(pathInfo);
-			
-			watcherPathInfo.WatchId = path.WatchId;
-
-			if (!path.ActionId.IsNullOrEmpty())
-				watcherPathInfo.ActionId = path.ActionId;
 		}
 	}
 }

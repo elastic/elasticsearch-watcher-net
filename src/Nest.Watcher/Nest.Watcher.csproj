@@ -131,6 +131,7 @@
     <Compile Include="DSL\WatcherStatsDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.Generated.cs" />
     <Compile Include="DSL\_Requests.Generated.cs" />
+    <Compile Include="Extensions\ElasticsearchPathInfoExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Serialization\CompareConditionConverter.cs" />
     <Compile Include="Serialization\ExecutionResultActionConverter.cs" />

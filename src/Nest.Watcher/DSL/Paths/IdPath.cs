@@ -55,9 +55,7 @@ namespace Nest
 			ElasticsearchPathInfo<TParameters> pathInfo)
 			where TParameters : IRequestParameters, new()
 		{
-			var watcherPathInfo = new WatcherPathInfo<TParameters>(pathInfo);
-			watcherPathInfo.Id = path.Id;
-			watcherPathInfo.WatchId = path.Id;
+			pathInfo.Id = path.Id;	
 		}
 	}
 }
