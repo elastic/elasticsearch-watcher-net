@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	
+
+
 
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public interface IAcknowledgeWatchRequest : INamePath<AcknowledgeWatchRequestParameters>
+	public interface IAcknowledgeWatchRequest : IWatchIdOptionalActionIdPath<AcknowledgeWatchRequestParameters>
 	{
 	}
 
-	public partial class AcknowledgeWatchRequest : NamePathBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
+	public partial class AcknowledgeWatchRequest : WatchIdOptionalActionIdPathBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
-		public AcknowledgeWatchRequest(string id) : base(id)
+		public AcknowledgeWatchRequest(string watchId) : base(watchId)
 		{
 		}
 
@@ -29,13 +32,12 @@ namespace Nest
 	{
 		public static  void Update(ElasticsearchPathInfo<AcknowledgeWatchRequestParameters> pathInfo, IAcknowledgeWatchRequest request)
 		{
-			pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 		}
 	}
 
 	[DescriptorFor("WatcherAckWatch")]
-	public partial class AcknowledgeWatchDescriptor : NamePathDescriptor<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
+	public partial class AcknowledgeWatchDescriptor : WatchIdOptionalActionIdPathDescriptor<AcknowledgeWatchDescriptor, AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AcknowledgeWatchRequestParameters> pathInfo)
 		{

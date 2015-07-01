@@ -118,6 +118,9 @@
     <Compile Include="Domain\Trigger\TriggerBase.cs" />
     <Compile Include="DSL\AcknowledgeWatchDescriptor.cs" />
     <Compile Include="DSL\DeleteWatchDescriptor.cs" />
+    <Compile Include="DSL\Paths\OptionalMetricPath.cs" />
+    <Compile Include="DSL\Paths\WatchIdOptionalActionIdPath.cs" />
+    <Compile Include="DSL\Paths\WatchIdPath.cs" />
     <Compile Include="DSL\StopWatcherDescriptor.cs" />
     <Compile Include="DSL\StartWatcherDescriptor.cs" />
     <Compile Include="DSL\RestartWatcherDescriptor.cs" />

@@ -13,7 +13,7 @@ namespace Nest
 		public static IExecuteWatchResponse ExecuteWatch(this IElasticClient client, string watchId, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new ExecuteWatchDescriptor().Name(watchId));
+			var descriptor = selector(new ExecuteWatchDescriptor().WatchId(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<ExecuteWatchDescriptor, ExecuteWatchRequestParameters, ExecuteWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherExecuteWatchDispatch<ExecuteWatchResponse>(p, d)
@@ -31,7 +31,7 @@ namespace Nest
 		public static Task<IExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client, string watchId, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new ExecuteWatchDescriptor().Name(watchId));
+			var descriptor = selector(new ExecuteWatchDescriptor().WatchId(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<ExecuteWatchDescriptor, ExecuteWatchRequestParameters, ExecuteWatchResponse, IExecuteWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherExecuteWatchDispatchAsync<ExecuteWatchResponse>(p, d)

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IExecuteWatchRequest : INamePath<ExecuteWatchRequestParameters>
+	public interface IExecuteWatchRequest : IIdPath<ExecuteWatchRequestParameters>
 	{
 
 		/// <summary>
@@ -59,9 +59,9 @@ namespace Nest
 		SimulatedActions SimulatedActions { get; set; }
 	}
 
-	public partial class ExecuteWatchRequest : NamePathBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchRequest : WatchIdPathBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
-		public ExecuteWatchRequest(string name) : base(name) { }
+		public ExecuteWatchRequest(string watchId) : base(watchId) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo)
 		{
@@ -88,14 +88,11 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo, IExecuteWatchRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Id = request.Name;
 		}
 	}
 
-
-
 	[DescriptorFor("WatcherExecuteWatch")]
-	public partial class ExecuteWatchDescriptor : NamePathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchDescriptor : WatchIdPathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		private IExecuteWatchRequest Self { get { return this; }}
 

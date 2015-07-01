@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutWatchRequest : INamePath<PutWatchRequestParameters>
+	public interface IPutWatchRequest : IIdPath<PutWatchRequestParameters>
 	{
 		[JsonProperty("metadata")]
 		IDictionary<string, object> Metadata { get; set; }
@@ -34,9 +34,9 @@ namespace Nest
 		IDictionary<string, IAction> Actions { get; set; }
 	}
 
-	public partial class PutWatchRequest : NamePathBase<PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchRequest : WatchIdPathBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
-		public PutWatchRequest(string id) : base(id) { }
+		public PutWatchRequest(string watchId) : base(watchId) { }
 
 		public IDictionary<string, object> Metadata { get; set; }
 
@@ -63,12 +63,11 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<PutWatchRequestParameters> pathInfo, IPutWatchRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			pathInfo.Id = request.Name;
 		}
 	}
 
 	[DescriptorFor("WatcherPutWatch")]
-	public partial class PutWatchDescriptor : NamePathDescriptor<PutWatchDescriptor, PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchDescriptor : WatchIdPathDescriptor<PutWatchDescriptor, PutWatchRequestParameters>, IPutWatchRequest
 	{
 		private IPutWatchRequest Self { get { return this; } }
 		IDictionary<string, object> IPutWatchRequest.Metadata  { get; set; }
