@@ -9,23 +9,23 @@ using Elasticsearch.Net;
 namespace Nest.Watcher.Tests.Integration.Restart
 {
 	[TestFixture]
-	public class RestartWatcherTests : IntegrationTests
+	public class Basic : IntegrationTest
 	{
 		[Test]
-		public void RestartWatcher_Basic_Fluent()
+		public override void Fluent()
 		{
 			var restartResponse = this.Client.RestartWatcher();
-			AssertBasic(restartResponse);
+			Assert(restartResponse);
 		}
 
 		[Test]
-		public void RestartWatcher_Basic_OIS()
+		public override void ObjectInitializer()
 		{
 			var restartResponse = this.Client.RestartWatcher(new RestartWatcherRequest());
-			AssertBasic(restartResponse);
+			Assert(restartResponse);
 		}
 
-		private void AssertBasic(IRestartWatcherResponse response)
+		protected virtual void Assert(IRestartWatcherResponse response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.ConnectionStatus.HttpStatusCode.Should().Be(200);

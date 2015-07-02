@@ -7,8 +7,11 @@ using NUnit.Framework;
 
 namespace Nest.Watcher.Tests.Integration
 {
-	public abstract class IntegrationTests
+	public abstract class IntegrationTest
 	{
+		public abstract void Fluent();
+		public abstract void ObjectInitializer();
+
 		protected List<string> _watchIds = new List<string>();
 
 		public IElasticClient Client

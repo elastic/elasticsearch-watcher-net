@@ -9,10 +9,10 @@ using Elasticsearch.Net;
 namespace Nest.Watcher.Tests.Integration.Acknowledge
 {
 	[TestFixture]
-	public class AcknowledgeWatchTests : IntegrationTests
+	public class Basic : IntegrationTest
 	{
 		[Test]
-		public void AcknowledgeWatch_Basic_Fluent()
+		public override void Fluent()
 		{
 			var watchId = PutWatch();
 			var health = this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
@@ -21,7 +21,7 @@ namespace Nest.Watcher.Tests.Integration.Acknowledge
 		}
 
 		[Test]
-		public void AcknowledgeWatch_Basic_OIS()
+		public override void ObjectInitializer()
 		{
 			var watchId = PutWatch();
 			var health = this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
@@ -29,25 +29,7 @@ namespace Nest.Watcher.Tests.Integration.Acknowledge
 			Assert(ackResponse);
 		}
 
-		[Test]
-		public void AcknowledgeWatch_IndividualAction_OIS()
-		{
-			var watchId = PutWatch();
-			var health = this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
-			var ackResponse = this.Client.AcknowledgeWatch(watchId, ack => ack.ActionId("test_index"));
-			Assert(ackResponse);
-		}
-
-		[Test]
-		public void AcknowledgeWatch_IndividualAction_Fluent()
-		{
-			var watchId = PutWatch();
-			var health = this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
-			var ackResponse = this.Client.AcknowledgeWatch(new AcknowledgeWatchRequest(watchId) { ActionId = "test_index" });
-			Assert(ackResponse);
-		}
-
-		private void Assert(IAcknowledgeWatchResponse response)
+		protected virtual void Assert(IAcknowledgeWatchResponse response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.ConnectionStatus.HttpStatusCode.Should().Be(200);

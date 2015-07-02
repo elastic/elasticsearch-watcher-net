@@ -41,7 +41,8 @@
   <ItemGroup>
     <Compile Include="Acknowledge\AcknowledgeWatchTests.cs" />
     <Compile Include="Delete\DeleteWatchTests.cs" />
-    <Compile Include="Execute\ExecuteWatchBasicTests.cs" />
+    <Compile Include="Execute\Basic.cs" />
+    <Compile Include="Execute\MinimalBody.cs" />
     <Compile Include="Get\GetWatchTests.cs" />
     <Compile Include="Info\WatcherInfoTests.cs" />
     <Compile Include="IntegrationTests.cs" />

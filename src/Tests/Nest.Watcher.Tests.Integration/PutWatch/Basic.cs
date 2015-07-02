@@ -8,10 +8,10 @@ using FluentAssertions;
 namespace Nest.Watcher.Tests.Integration.Put
 {
 	[TestFixture]
-	public class PutWatchTests : IntegrationTests
+	public class Basic : IntegrationTest
 	{
 		[Test]
-		public void PutWatch_Basic_Fluent()
+		public override void Fluent()
 		{
 			var watchId = CreateUniqueWatchId();
 			var response = this.Client.PutWatch(watchId, p => p
@@ -37,11 +37,11 @@ namespace Nest.Watcher.Tests.Integration.Put
 				)
 			);
 
-			AssertBasic(response, watchId);
+			Assert(response, watchId);
 		}
 
 		[Test]
-		public void PutWatch_Basic_OIS()
+		public override void ObjectInitializer()
 		{
 			var watchId = CreateUniqueWatchId();
 			var response = this.Client.PutWatch(new PutWatchRequest(watchId)
@@ -69,10 +69,10 @@ namespace Nest.Watcher.Tests.Integration.Put
 					}
 				});
 
-			AssertBasic(response, watchId);
+			Assert(response, watchId);
 		}
 
-		private void AssertBasic(IPutWatchResponse response, string expectedId)
+		protected virtual void Assert(IPutWatchResponse response, string expectedId)
 		{
 			response.IsValid.Should().BeTrue();
 			response.ConnectionStatus.HttpStatusCode.Should().Be(201);

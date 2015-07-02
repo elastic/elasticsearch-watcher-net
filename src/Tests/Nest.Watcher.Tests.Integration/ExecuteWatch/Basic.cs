@@ -9,11 +9,10 @@ using Elasticsearch.Net;
 namespace Nest.Watcher.Tests.Integration.Execute
 {
 	[TestFixture]
-	public class ExecuteWatchTests : IntegrationTests
+	public class Basic : IntegrationTest
 	{
-
 		[Test]
-		public void ExecuteWatch_Basic_Fluent()
+		public override void Fluent()
 		{
 			//var health = this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Green));
 			var watchId = CreateUniqueWatchId();
@@ -125,6 +124,17 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			loggingAction.Logging.LoggedText.Should().Be("hello from nest");
 
 			executeWatch.ExecutionResult.ExecutionTime.Should().HaveValue();
+		}
+
+		[Test]
+		public override void ObjectInitializer()
+		{
+			throw new NotImplementedException();
+		}
+
+		protected virtual void Assert(IExecuteWatchResponse response)
+		{
+
 		}
 	}
 }

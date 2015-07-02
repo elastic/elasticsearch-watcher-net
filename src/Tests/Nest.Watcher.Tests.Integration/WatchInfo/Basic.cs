@@ -8,24 +8,24 @@ using FluentAssertions;
 namespace Nest.Watcher.Tests.Integration.Info
 {
 	[TestFixture]
-	public class WatcherInfoTests : IntegrationTests
+	public class Basic : IntegrationTest
 	{
 		[Test]
 
-		public void WatcherInfo_Basic_Fluent()
+		public override void Fluent()
 		{
 			var response = this.Client.WatcherInfo();
-			AssertBasic(response);
+			Assert(response);
 		}
 
 		[Test]
-		public void WatcherInfo_Basic_OIS()
+		public override void ObjectInitializer()
 		{
 			var response = this.Client.WatcherInfo(new WatcherInfoRequest());
-			AssertBasic(response);
+			Assert(response);
 		}
 
-		private void AssertBasic(IWatcherInfoResponse response)
+		protected virtual void Assert(IWatcherInfoResponse response)
 		{
 			response.IsValid.Should().BeTrue();
 			response.ConnectionStatus.HttpStatusCode.Should().Be(200);

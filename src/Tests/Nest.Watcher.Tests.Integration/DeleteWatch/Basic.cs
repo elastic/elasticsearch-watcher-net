@@ -7,25 +7,25 @@ using FluentAssertions;
 
 namespace Nest.Watcher.Tests.Integration.Delete
 {
-	public class DeleteWatchTests : IntegrationTests
+	public class Basic : IntegrationTest
 	{
 		[Test]
-		public void DeleteWatch_Basic_Fluent()
+		public override void Fluent()
 		{
 			var id = PutWatch();
 			var response = this.Client.DeleteWatch(id);
-			AssertBasic(response, id);
+			Assert(response, id);
 		}
 
 		[Test]
-		public void DeleteWatch_Basic_OIS()
+		public override void ObjectInitializer()
 		{
 			var id = PutWatch();
 			var response = this.Client.DeleteWatch(new DeleteWatchRequest(id));
-			AssertBasic(response, id);
+			Assert(response, id);
 		}
 
-		private void AssertBasic(IDeleteWatchResponse response, string expectedId)
+		protected virtual void Assert(IDeleteWatchResponse response, string expectedId)
 		{
 			response.IsValid.Should().BeTrue();
 			response.ConnectionStatus.HttpStatusCode.Should().Be(200);
