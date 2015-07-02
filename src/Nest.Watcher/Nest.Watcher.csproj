@@ -55,8 +55,12 @@
     <Compile Include="Domain\ActionExecution\ActionExecutionState.cs" />
     <Compile Include="Domain\ActionExecution\ExecutionResult.cs" />
     <Compile Include="Domain\Action\Action.cs" />
+    <Compile Include="Domain\Action\ActionType.cs" />
     <Compile Include="Domain\Condition\CompareCondition.cs" />
     <Compile Include="Domain\ActionExecution\ActionExecutionMode.cs" />
+    <Compile Include="Domain\Input\InputType.cs" />
+    <Compile Include="Domain\Status.cs" />
+    <Compile Include="Domain\Condition\ConditionType.cs" />
     <Compile Include="Domain\Enums\Enums.Generated.cs" />
     <Compile Include="Domain\Transform\TransformBase.cs" />
     <Compile Include="Domain\Transform\TransformContainer.cs" />
@@ -134,7 +138,6 @@
     <Compile Include="Extensions\ElasticsearchPathInfoExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Serialization\CompareConditionConverter.cs" />
-    <Compile Include="Serialization\ExecutionResultActionConverter.cs" />
     <Compile Include="Serialization\SimpleInputConverter.cs" />
     <Compile Include="Serialization\SimulatedActionsConverter.cs" />
     <Compile Include="Serialization\ActionDictionaryConverter.cs" />

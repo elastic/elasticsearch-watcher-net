@@ -41,12 +41,12 @@ namespace Nest
 			schedule.ContainIn(this);
 		}
 
-		IDailySchedule IScheduleContainer.Daily { get; set; }
-		IMonthlySchedule IScheduleContainer.Monthly { get; set; }
-		IHourlySchedule IScheduleContainer.Hourly { get; set; }
-		IWeeklySchedule IScheduleContainer.Weekly { get; set; }
-		IYearlySchedule IScheduleContainer.Yearly { get; set; }
-		string IScheduleContainer.Cron { get; set; }
+		public IDailySchedule Daily { get; set; }
+		public IMonthlySchedule Monthly { get; set; }
+		public IHourlySchedule Hourly { get; set; }
+		public IWeeklySchedule Weekly { get; set; }
+		public IYearlySchedule Yearly { get; set; }
+		public string Cron { get; set; }
 
 		internal override void ContainIn(ITriggerContainer container)
 		{

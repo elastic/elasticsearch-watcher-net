@@ -37,6 +37,7 @@ namespace Nest
 	public partial class PutWatchRequest : IdPathBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		public PutWatchRequest(string watchId) : base(watchId) { }
+		public PutWatchRequest() : base(null) { }
 
 		public IDictionary<string, object> Metadata { get; set; }
 

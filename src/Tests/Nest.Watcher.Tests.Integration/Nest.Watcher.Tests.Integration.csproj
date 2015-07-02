@@ -39,19 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acknowledge\AcknowledgeWatchTests.cs" />
-    <Compile Include="Delete\DeleteWatchTests.cs" />
-    <Compile Include="Execute\Basic.cs" />
-    <Compile Include="Execute\MinimalBody.cs" />
-    <Compile Include="Get\GetWatchTests.cs" />
-    <Compile Include="Info\WatcherInfoTests.cs" />
+    <Compile Include="AckWatch\Basic.cs" />
+    <Compile Include="AckWatch\IndividualAction.cs" />
+    <Compile Include="DeleteWatch\Basic.cs" />
+    <Compile Include="ExecuteWatch\Basic.cs" />
+    <Compile Include="ExecuteWatch\InlineWatch.cs" />
+    <Compile Include="ExecuteWatch\MinimalBody.cs" />
+    <Compile Include="GetWatch\Missing.cs" />
+    <Compile Include="GetWatch\Basic.cs" />
+    <Compile Include="WatchInfo\Basic.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Put\PutWatchTests.cs" />
-    <Compile Include="Restart\RestartWatcherTests.cs" />
-    <Compile Include="Start\StartWatcherTests.cs" />
-    <Compile Include="Stats\WatcherStatsTests.cs" />
-    <Compile Include="Stop\StopWatcherTests.cs" />
+    <Compile Include="PutWatch\WithActionThrottlePeriod.cs" />
+    <Compile Include="PutWatch\WithThrottlePeriod.cs" />
+    <Compile Include="PutWatch\Basic.cs" />
+    <Compile Include="RestartWatcher\Basic.cs" />
+    <Compile Include="StartWatcher\Basic.cs" />
+    <Compile Include="Stats\Basic.cs" />
+    <Compile Include="StopWatcher\Basic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

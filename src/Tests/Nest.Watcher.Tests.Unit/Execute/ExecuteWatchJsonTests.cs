@@ -70,7 +70,7 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				IgnoreCondition = false,
 				IgnoreThrottle = true,
 				RecordExecution = false,
-				TriggerEvent = new ScheduleTriggerEvent
+				TriggerData = new ScheduleTriggerEvent
 				{
 					ScheduledTime = dt,
 					TriggeredTime = dt,
@@ -96,7 +96,7 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				.IgnoreCondition(false)
 				.IgnoreThrottle()
 				.RecordExecution(false)
-				.TriggerEvent(te=>te
+				.TriggerData(te=>te
 					.Schedule(s=>s
 						.ScheduledTime(dt)
 						.TriggeredTime(dt)

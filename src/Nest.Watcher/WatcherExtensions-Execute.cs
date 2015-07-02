@@ -9,15 +9,22 @@ namespace Nest
 {
 	public static partial class WatcherExtensions
 	{
-		//TODO should selector be null here?
-		public static IExecuteWatchResponse ExecuteWatch(this IElasticClient client, string watchId, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector)
+		public static IExecuteWatchResponse ExecuteWatch(this IElasticClient client, string watchId, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new ExecuteWatchDescriptor().Id(watchId));
+			var descriptor = new ExecuteWatchDescriptor();
+			if (!watchId.IsNullOrEmpty())
+				descriptor.Id(watchId);
+			descriptor = selector(descriptor);
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<ExecuteWatchDescriptor, ExecuteWatchRequestParameters, ExecuteWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherExecuteWatchDispatch<ExecuteWatchResponse>(p, d)
 			);
+		}
+
+		public static IExecuteWatchResponse ExecuteWatch(this IElasticClient client, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector)
+		{
+			return ExecuteWatch(client, null, selector);
 		}
 
 		public static IExecuteWatchResponse ExecuteWatch(this IElasticClient client, IExecuteWatchRequest request)
@@ -28,16 +35,24 @@ namespace Nest
 			);
 		}
 
-		public static Task<IExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client, string watchId, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector)
+		public static Task<IExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client, string watchId, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new ExecuteWatchDescriptor().Id(watchId));
+			var descriptor = new ExecuteWatchDescriptor();
+			if (!watchId.IsNullOrEmpty())
+				descriptor.Id(watchId);
+			descriptor = selector(descriptor);
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<ExecuteWatchDescriptor, ExecuteWatchRequestParameters, ExecuteWatchResponse, IExecuteWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherExecuteWatchDispatchAsync<ExecuteWatchResponse>(p, d)
 			);
 		}
 
+		public static Task<IExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client, Func<ExecuteWatchDescriptor, ExecuteWatchDescriptor> selector)
+		{
+			return ExecuteWatchAsync(client, null, selector);
+		}
+		
 		public static Task<IExecuteWatchResponse> ExecuteWatchAsync(this IElasticClient client, IExecuteWatchRequest request)
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<IExecuteWatchRequest, ExecuteWatchRequestParameters, ExecuteWatchResponse, IExecuteWatchResponse>(

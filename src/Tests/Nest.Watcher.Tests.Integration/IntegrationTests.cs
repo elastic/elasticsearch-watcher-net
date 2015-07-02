@@ -41,7 +41,7 @@ namespace Nest.Watcher.Tests.Integration
 			return id;
 		}
 
-		protected string PutWatch()
+		protected virtual string PutWatch()
 		{
 			var watchId = CreateUniqueWatchId();
 			var response = this.Client.PutWatch(watchId, p => p
