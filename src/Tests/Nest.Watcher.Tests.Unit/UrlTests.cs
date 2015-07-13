@@ -62,7 +62,7 @@ namespace Nest.Watcher.Tests.Unit
 		[Test]
 		public void WatcherStats()
 		{
-			this.UriEquals("GET", "/_watcher/stats", c=>c.WatcherStats());
+			this.UriEquals("GET", "/_watcher/stats", c=>c.WatcherStats(p=>p.Metric(Metric.PendingWatches)));
 		}
 
 	}

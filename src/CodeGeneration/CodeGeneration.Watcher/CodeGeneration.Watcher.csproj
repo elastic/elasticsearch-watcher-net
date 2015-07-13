@@ -55,6 +55,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
     <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\WatcherStatsDescriptorOverrides.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
