@@ -29,7 +29,9 @@ namespace Nest.Watcher.Tests.Integration.Stats
 			response.IsValid.Should().BeTrue();
 			response.ConnectionStatus.HttpStatusCode.Should().Be(200);
 			response.WatcherState.Should().Be("started");
-			response.ExecutionQueue.Should().NotBeNull();
+			response.ExecutionThreadPool.Should().NotBeNull();
+			response.CurrentWatches.Should().NotBeNull();
+			response.QueuedWatches.Should().NotBeNull();
 		}
 	}
 }

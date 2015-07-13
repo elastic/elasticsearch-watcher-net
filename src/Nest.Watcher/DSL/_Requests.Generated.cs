@@ -139,14 +139,6 @@ namespace Nest
 	///</summary>
 	public partial class WatcherStatsRequest 
 			{
-		
-		///<summary>Controls what additional stat metrics should be include in the response</summary>
-		public Metric Metric 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Metric>("metric"); } 
-			set { this.Request.RequestParameters.AddQueryString("metric", value); }
-		}
-		
 	}
 	
 		

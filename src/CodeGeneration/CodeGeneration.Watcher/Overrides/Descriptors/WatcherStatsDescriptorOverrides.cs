@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CodeGeneration.Watcher.Overrides.Descriptors
 {
-	public class DeleteWarmerDescriptorOverrides : IDescriptorOverrides
+	public class WatcherStatsDescriptorOverrides : IDescriptorOverrides
 	{
 		public IEnumerable<string> SkipQueryStringParams
 		{

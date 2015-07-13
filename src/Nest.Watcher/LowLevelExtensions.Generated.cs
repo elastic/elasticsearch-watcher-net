@@ -2292,7 +2292,7 @@ namespace Nest
 		internal static ElasticsearchResponse<T> WatcherStats<T>(this IElasticsearchClient client, Metric metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null)
 		{
 			metric.ThrowIfNull("metric");
-			var url = "_watcher/stats/{0}".F(client.Encoded(metric));
+			var url = "_watcher/stats/{0}".F(KnownEnums.Resolve(metric));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -2326,7 +2326,7 @@ namespace Nest
 		internal static Task<ElasticsearchResponse<T>> WatcherStatsAsync<T>(this IElasticsearchClient client, Metric metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null)
 		{
 			metric.ThrowIfNull("metric");
-			var url = "_watcher/stats/{0}".F(client.Encoded(metric));
+			var url = "_watcher/stats/{0}".F(KnownEnums.Resolve(metric));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -2362,7 +2362,7 @@ namespace Nest
 		internal static ElasticsearchResponse<DynamicDictionary> WatcherStats(this IElasticsearchClient client, Metric metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null)
 		{
 			metric.ThrowIfNull("metric");
-			var url = "_watcher/stats/{0}".F(client.Encoded(metric));
+			var url = "_watcher/stats/{0}".F(KnownEnums.Resolve(metric));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -2398,7 +2398,7 @@ namespace Nest
 		internal static Task<ElasticsearchResponse<DynamicDictionary>> WatcherStatsAsync(this IElasticsearchClient client, Metric metric, Func<WatcherStatsRequestParameters, WatcherStatsRequestParameters> requestParameters = null)
 		{
 			metric.ThrowIfNull("metric");
-			var url = "_watcher/stats/{0}".F(client.Encoded(metric));
+			var url = "_watcher/stats/{0}".F(KnownEnums.Resolve(metric));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)

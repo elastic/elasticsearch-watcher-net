@@ -149,16 +149,6 @@ namespace Nest
 	///</summary>
 	public class WatcherStatsRequestParameters : FluentRequestParameters<WatcherStatsRequestParameters> 
 	{
-		
-		internal Metric _metric { get; set; }
-		///<summary>Controls what additional stat metrics should be include in the response</summary>
-		public WatcherStatsRequestParameters Metric(Metric metric)
-		{
-			this._metric = metric;
-			this.AddQueryString("metric", this._metric);
-			return this;
-		}
-		
 	}
 	
 	

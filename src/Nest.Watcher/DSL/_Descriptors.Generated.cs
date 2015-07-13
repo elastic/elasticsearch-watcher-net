@@ -163,14 +163,6 @@ namespace Nest
 	{
 		
 	
-
-		///<summary>Controls what additional stat metrics should be include in the response</summary>
-		public WatcherStatsDescriptor Metric(Metric metric)
-		{
-			this.Request.RequestParameters.Metric(metric);
-			return this;
-		}
-		
 	
 	}
 	

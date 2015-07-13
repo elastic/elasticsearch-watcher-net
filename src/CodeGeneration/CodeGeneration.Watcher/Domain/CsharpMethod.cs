@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CodeGeneration.Watcher.Domain
 {
@@ -23,6 +26,17 @@ namespace CodeGeneration.Watcher.Domain
 		public bool Unmapped { get; set; }
 		public IEnumerable<ApiUrlPart> Parts { get; set; }
 		public ApiUrl Url { get; set; }
+
+		public string FormattedUrlArgs()
+		{
+			var args = from p in this.Parts
+				where p.Name != "body"
+				let known = $"KnownEnums.Resolve({p.Name})"
+				let encoded = $"client.Encoded({p.Name})"
+				select p.Type == "enum" ? known : encoded;
+
+			return string.Join(", ", args);
+		}
 
 		public static CsharpMethod Clone(CsharpMethod method)
 		{

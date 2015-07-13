@@ -60,10 +60,17 @@ namespace Nest.Watcher.Tests.Unit
 		}
 
 		[Test]
+		public void WatcherStatsWithMetric()
+		{
+			this.UriEquals("GET", "/_watcher/stats/pending_watches", c=>c.WatcherStats(p=>p.Metric(Metric.PendingWatches)));
+		}
+
+		[Test]
 		public void WatcherStats()
 		{
-			this.UriEquals("GET", "/_watcher/stats", c=>c.WatcherStats(p=>p.Metric(Metric.PendingWatches)));
+			this.UriEquals("GET", "/_watcher/stats/_all", c=>c.WatcherStats(new WatcherStatsRequest()));
 		}
+
 
 	}
 }

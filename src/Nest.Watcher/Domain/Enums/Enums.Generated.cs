@@ -22,17 +22,6 @@ namespace Nest
 		PendingWatches
         }
     
-    
-        public enum WatcherStatsMetric
-        {
-        [EnumMember(Value = "_all")]
-		All,
-		[EnumMember(Value = "queued_watches")]
-		QueuedWatches,
-		[EnumMember(Value = "pending_watches")]
-		PendingWatches
-        }
-    
 
 	public static class KnownEnums
 	{
@@ -46,17 +35,6 @@ namespace Nest
         case Metric.All: return "_all";
 					case Metric.QueuedWatches: return "queued_watches";
 					case Metric.PendingWatches: return "pending_watches";
-        }
-        }
-    
-    
-        if (e is WatcherStatsMetric)
-        {
-        switch((WatcherStatsMetric)e)
-        {
-        case WatcherStatsMetric.All: return "_all";
-					case WatcherStatsMetric.QueuedWatches: return "queued_watches";
-					case WatcherStatsMetric.PendingWatches: return "pending_watches";
         }
         }
     

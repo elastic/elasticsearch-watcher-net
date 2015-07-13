@@ -22,7 +22,7 @@ namespace Nest
 		where TDescriptor : OptionalMetricPathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private IOptionalMetricPath<TParameters> Self { get { return this; } }
+		private IOptionalMetricPath<TParameters> Self => this;
 
 		Metric IOptionalMetricPath<TParameters>.Metric { get; set; }
 

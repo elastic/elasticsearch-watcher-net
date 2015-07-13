@@ -7,10 +7,10 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject]
-	public class WatcherExecutionQueue
+	public class ExecutionThreadPool
 	{
-		[JsonProperty("size")]
-		public int Size { get; internal set; }
+		[JsonProperty("queue_size")]
+		public int QueueSize { get; internal set; }
 
 		[JsonProperty("max_size")]
 		public int MaxSize { get; internal set; }
