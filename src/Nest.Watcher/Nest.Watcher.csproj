@@ -59,6 +59,7 @@
     <Compile Include="Domain\Condition\CompareCondition.cs" />
     <Compile Include="Domain\ActionExecution\ActionExecutionMode.cs" />
     <Compile Include="Domain\Input\InputType.cs" />
+    <Compile Include="Domain\Enums\ExecutionPhase.cs" />
     <Compile Include="Domain\Status.cs" />
     <Compile Include="Domain\Condition\ConditionType.cs" />
     <Compile Include="Domain\Enums\Enums.Generated.cs" />

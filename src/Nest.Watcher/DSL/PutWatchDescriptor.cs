@@ -15,7 +15,7 @@ namespace Nest
 		IDictionary<string, object> Metadata { get; set; }
 
 		[JsonProperty("trigger")]
-		TriggerContainer Trigger { get; set; }
+		ITriggerContainer Trigger { get; set; }
 
 		[JsonProperty("input")]
 		InputContainer Input { get; set; }
@@ -41,7 +41,7 @@ namespace Nest
 
 		public IDictionary<string, object> Metadata { get; set; }
 
-		public TriggerContainer Trigger { get; set; }
+		public ITriggerContainer Trigger { get; set; }
 
 		public InputContainer Input { get; set; }
 
@@ -72,7 +72,7 @@ namespace Nest
 	{
 		private IPutWatchRequest Self { get { return this; } }
 		IDictionary<string, object> IPutWatchRequest.Metadata  { get; set; }
-		TriggerContainer IPutWatchRequest.Trigger  { get; set; }
+		ITriggerContainer IPutWatchRequest.Trigger  { get; set; }
 		InputContainer IPutWatchRequest.Input  { get; set; }
 		string IPutWatchRequest.ThrottlePeriod  { get; set; }
 		ConditionContainer IPutWatchRequest.Condition  { get; set; }
@@ -85,7 +85,7 @@ namespace Nest
 			return this;
 		}
 
-		public PutWatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> triggerSelector)
+		public PutWatchDescriptor Trigger(Func<TriggerDescriptor, ITriggerContainer> triggerSelector)
 		{
 			Self.Trigger = triggerSelector(new TriggerDescriptor());
 			return this;

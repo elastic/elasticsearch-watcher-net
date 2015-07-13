@@ -30,9 +30,10 @@ namespace Nest
 		public IScheduleContainer Schedule { get; set; }
 	}
 
-	public class TriggerDescriptor : TriggerContainer
+	public class TriggerDescriptor : ITriggerContainer
 	{
 		private ITriggerContainer Self { get { return this; } }
+		IScheduleContainer ITriggerContainer.Schedule { get; set; }
 	
 		public TriggerDescriptor Schedule(Func<ScheduleDescriptor, IScheduleContainer> selector)
 		{

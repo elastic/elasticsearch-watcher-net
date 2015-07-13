@@ -25,5 +25,8 @@ namespace Nest
 
 		[JsonProperty("status")]
 		public WatchStatus Status { get; internal set; }
+
+		[JsonProperty("throttle_period")]
+		public string ThrottlePeriod { get; internal set; }
 	}
 }
