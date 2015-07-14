@@ -21,7 +21,7 @@ namespace Nest.Watcher.Tests.Integration.Put
 				.Trigger(t => t
 					.Schedule(s => s.Hourly(h => h.Minute(0, 5)))
 				)
-				.Input(i=>i.Simple(s=>s.Add("send", "yes")))
+				.Input(i=>i.Simple(s=>s.Add("payload", new { send = "yes"})))
 				.Condition(c=>c.Always())
 				.Actions(a=>a.Add("test_index", new IndexAction
 				{
@@ -41,7 +41,23 @@ namespace Nest.Watcher.Tests.Integration.Put
 		{
 			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Green));
 			var watchId = CreateUniqueWatchId();
-			throw new NotImplementedException();
+			var put = this.Client.PutWatch(new PutWatchRequest(watchId)
+			{
+				ThrottlePeriod = "10s",
+				Trigger = new TriggerContainer()
+				{
+					Schedule = new ScheduleContainer(new HourlySchedule {Minute = new[] {0, 5}})
+				},
+				Input = new SimpleInput(new Dictionary<string, object> { {"payload", new { send = "yes"}} }),
+				Actions = new Dictionary<string, IAction>
+				{
+					{"test_index", new IndexAction {Index = "test", DocType = "test2"}}
+				},
+				Condition = new AlwaysCondition()
+			});
+			this.AssertPutWatchResponse(put, watchId);
+			var get = this.Client.GetWatch(watchId);
+			this.AssertGetWatchResponse(get, watchId);
 		}
 
 		private void AssertPutWatchResponse(IPutWatchResponse response, string watchId)

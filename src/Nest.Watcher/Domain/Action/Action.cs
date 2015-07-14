@@ -12,10 +12,15 @@ namespace Nest
 	{
 		[JsonProperty("transform")]
 		TransformContainer Transform { get; set; }
+
+		[JsonIgnore]
+		string ThrottlePeriod { get; set; }
 	}
 
 	public abstract class Action : IAction
 	{
 		public TransformContainer Transform { get; set; }
+
+		public string ThrottlePeriod { get; set; }
 	}
 }

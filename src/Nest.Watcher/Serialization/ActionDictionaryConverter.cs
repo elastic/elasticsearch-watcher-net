@@ -24,28 +24,52 @@ namespace Nest.Watcher.Serialization
 			foreach(var child in actions.Children())
 			{
 				var property = child as JProperty;
+				if (property == null) continue;
 				var name = property.Name;
-				var action = property.Children().First() as JObject;
-				if (action["index"] != null)
-					dictionary.Add(name, action["index"].ToObject<IndexAction>());
-				else if (action["email"] != null)
-					dictionary.Add(name, action["email"].ToObject<EmailAction>());
-				else if (action["webhook"] != null)
-					dictionary.Add(name, action["webhook"].ToObject<WebhookAction>());
-				else if (action["logging"] != null)
-					dictionary.Add(name, action["logging"].ToObject<LoggingAction>());
+
+				var actionJson = property.Value as JObject;
+				if (actionJson == null) continue;
+
+				string throttlePeriod = null;
+				IAction action = null;
+				foreach (var prop in actionJson.Properties())
+				{
+					if (prop.Name == "throttle_period")
+						throttlePeriod = prop.Value.Value<string>();
+					else if (prop.Name == "index")
+					{
+						action = prop.Value.ToObject<IndexAction>();
+						dictionary.Add(name, action);
+					}
+					else if (prop.Name == "email")
+					{
+						action = prop.Value.ToObject<EmailAction>();
+						dictionary.Add(name, action);
+					}
+					else if (prop.Name == "webhook")
+					{
+						action = prop.Value.ToObject<WebhookAction>();
+						dictionary.Add(name, action);
+					}
+					else if (prop.Name == "logging")
+					{
+						action = prop.Value.ToObject<LoggingAction>();
+						dictionary.Add(name, action);
+					}
+				}
+				if (action != null) action.ThrottlePeriod = throttlePeriod;
 			}
-			if (dictionary.Count > 0)
-				return dictionary;
-			return null;
+
+			return dictionary.Count > 0 ? dictionary : null;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			writer.WriteStartObject();
-			var actions = value as IDictionary<string, IAction>;
-			foreach(var kvp in actions)
+			var actions = (value as IDictionary<string, IAction>) ?? new Dictionary<string, IAction>();
+			foreach(var kvp in actions.Where(kv=>kv.Value != null))
 			{
+
 				if (kvp.Value is IEmailAction)
 					WriteActionEntry(kvp.Key, "email", kvp.Value, writer, serializer);
 				else if (kvp.Value is IIndexAction)
@@ -60,10 +84,15 @@ namespace Nest.Watcher.Serialization
 			writer.WriteEndObject();
 		}
 
-		private void WriteActionEntry(string id, string name, object action, JsonWriter writer, JsonSerializer serializer)
+		private void WriteActionEntry(string id, string name, IAction action, JsonWriter writer, JsonSerializer serializer)
 		{
 			writer.WritePropertyName(id);
 			writer.WriteStartObject();
+			if (!action.ThrottlePeriod.IsNullOrEmpty())
+			{
+				writer.WritePropertyName("throttle_period");
+				writer.WriteValue(action.ThrottlePeriod);
+			}
 			writer.WritePropertyName(name);
 			serializer.Serialize(writer, action);
 			writer.WriteEndObject();
