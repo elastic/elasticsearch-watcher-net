@@ -25,10 +25,9 @@ namespace Nest.Watcher.Tests.Integration.Execute
 				)
 				.AlternativeInput(i => i.Add("foo", "bar"))
 				.IgnoreCondition()
-				//Not available in beta
-				//.ActionModes(a => a
-				//	.Add("_all", ActionExecutionMode.ForceSimulate)
-				//)
+				.ActionModes(a => a
+					.Add("_all", ActionExecutionMode.ForceSimulate)
+				)
 				.RecordExecution(true)
 			);
 
@@ -52,11 +51,11 @@ namespace Nest.Watcher.Tests.Integration.Execute
 						{ "foo", "bar" }
 					},
 					IgnoreCondition = true,
-					RecordExecution = true
-					//ActionModes = new Dictionary<string, ActionExecutionMode>
-					//{
-					//	{ "_all" , ActionExecutionMode.ForceSimulate}
-					//}
+					RecordExecution = true,
+					ActionModes = new Dictionary<string, ActionExecutionMode>
+					{
+						{ "_all" , ActionExecutionMode.ForceSimulate}
+					}
 				});
 			Assert(executeWatch, watchId);
 		}
