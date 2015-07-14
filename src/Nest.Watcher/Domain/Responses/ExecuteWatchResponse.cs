@@ -135,7 +135,7 @@ namespace Nest
 		public string Account { get; set; }
 
 		[JsonProperty("message")]
-		public string Message { get; set; }
+		public EmailResult Message { get; set; }
 	}
 
 	[JsonObject]

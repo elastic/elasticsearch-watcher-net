@@ -26,9 +26,6 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					.Add("foo", "bar")
 				)
 				.IgnoreCondition()
-				//.ActionModes(am => am
-				//	.Add("_all", ActionExecutionMode.ForceSimulate)
-				//)
 				.Watch(w => w
 					.Trigger(tr => tr
 						.Schedule(tschd => tschd

@@ -26,7 +26,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 				.AlternativeInput(i => i.Add("foo", "bar"))
 				.IgnoreCondition()
 				.ActionModes(a => a
-					.Add("_all", ActionExecutionMode.ForceSimulate)
+					.Add("email_admin", ActionExecutionMode.ForceSimulate)
 				)
 				.RecordExecution(true)
 			);
@@ -54,8 +54,8 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					RecordExecution = true,
 					ActionModes = new Dictionary<string, ActionExecutionMode>
 					{
-						{ "_all" , ActionExecutionMode.ForceSimulate}
-					}
+						{ "email_admin" , ActionExecutionMode.ForceSimulate}
+					},
 				});
 			Assert(executeWatch, watchId);
 		}
@@ -82,12 +82,16 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			response.WatchRecord.Result.Actions.Should().NotBeNullOrEmpty();
 			response.WatchRecord.Result.Actions.Count().Should().Be(3);
 
+			var inputContainer = response.WatchRecord.Input as IInputContainer;
+			inputContainer.Should().NotBeNull();
+			inputContainer.Search.Should().NotBeNull();
+
 			var emailAction = response.WatchRecord.Result.Actions.Where(a => a.Id == "email_admin").FirstOrDefault();
 			emailAction.Should().NotBeNull();
 			emailAction.Type.Should().Be(ActionType.Email);
-			emailAction.Reason.Should().NotBeEmpty();
-			emailAction.Status.Should().Be(Status.Failure);
-			emailAction.Email.Should().BeNull();
+			emailAction.Status.Should().Be(Status.Simulated);
+			emailAction.Email.Should().NotBeNull();
+			emailAction.Email.Message.SentDate.Should().HaveValue();
 
 			var indexAction = response.WatchRecord.Result.Actions.Where(a => a.Id == "index_action").FirstOrDefault();
 			indexAction.Should().NotBeNull();
@@ -98,6 +102,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			indexAction.Index.Response.Type.Should().Be("doctype2");
 			indexAction.Index.Response.Created.Should().BeTrue();
 			indexAction.Index.Response.Version.Should().Be(1);
+
 
 			var loggingAction = response.WatchRecord.Result.Actions.Where(a => a.Id == "logging_action").FirstOrDefault();
 			loggingAction.Should().NotBeNull();

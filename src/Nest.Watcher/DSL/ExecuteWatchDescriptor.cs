@@ -82,9 +82,9 @@ namespace Nest
 
 		public IDictionary<string, object> AlternativeInput { get; set; }
 
-	    public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
+		public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
 
-	    public SimulatedActions SimulatedActions { get; set; }
+		public SimulatedActions SimulatedActions { get; set; }
 
 		public IPutWatchRequest Watch { get; set; }
 	}
@@ -100,7 +100,7 @@ namespace Nest
 	[DescriptorFor("WatcherExecuteWatch")]
 	public partial class ExecuteWatchDescriptor : IdPathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
-		private IExecuteWatchRequest Self { get { return this; }}
+		private IExecuteWatchRequest Self { get { return this; } }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo)
 		{
@@ -112,8 +112,8 @@ namespace Nest
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
 		bool? IExecuteWatchRequest.IgnoreThrottle { get; set; }
 		IDictionary<string, object> IExecuteWatchRequest.AlternativeInput { get; set; }
-	    IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
-	    SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
+		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
+		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
 		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
 
 		public ExecuteWatchDescriptor TriggerData(Func<TriggerEventDescriptor, TriggerEventContainer> selector)
@@ -139,7 +139,7 @@ namespace Nest
 			Self.IgnoreThrottle = ignore;
 			return this;
 		}
-		
+
 		public ExecuteWatchDescriptor ActionModes(Func<FluentDictionary<string, ActionExecutionMode>, IDictionary<string, ActionExecutionMode>> selector)
 		{
 			Self.ActionModes = selector == null ? null : selector(new FluentDictionary<string, ActionExecutionMode>());
