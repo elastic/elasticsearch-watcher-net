@@ -167,7 +167,32 @@ namespace Nest
 
 	public class WebhookActionResult
 	{
-		// TODO
+		[JsonProperty("request")]
+		public WatcherHttpRequestResult Request { get; set; }
+
+		[JsonProperty("response")]
+		public WatcherHttpResponseResult Response { get; set; }
+	}
+
+	public class WatcherHttpRequestResult : WatcherHttpRequest
+	{
+		[JsonProperty("connection_timeout")]
+		public string ConnectionTimeout { get; set; }
+
+		[JsonProperty("read_timeout")]
+		public string ReadTimeout { get; set; }
+	}
+
+	public class WatcherHttpResponseResult 
+	{
+		[JsonProperty("status")]
+		public int StatusCode { get; set; }
+
+		[JsonProperty("headers")]
+		public IDictionary<string, string> Headers { get; set; }
+
+		[JsonProperty("body")]
+		public string Body { get; set; }
 	}
 
 	[JsonObject]
