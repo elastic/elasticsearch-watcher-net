@@ -9,12 +9,26 @@ namespace Nest
 	[JsonObject]
 	public interface IWebhookAction : IAction
 	{
-		[JsonProperty("request")]
-		WatcherHttpRequest Request { get; set; }
 	}
 	
-	public class WebhookAction : Action, IWebhookAction
+	public class WebhookAction : Action, IWebhookAction, IWatcherHttpRequest
 	{
-		public WatcherHttpRequest Request { get; set; }
+		public ConnectionScheme? Scheme { get; set; }
+
+		public int Port { get; set; }
+
+		public string Host { get; set; }
+
+		public string Path { get; set; }
+
+		public HttpMethod? Method { get; set; }
+
+		public IDictionary<string, string> Headers { get; set; }
+
+		public IDictionary<string, object> Params { get; set; }
+
+		public IWatcherAuthentication Authentication { get; set; }
+
+		public string Body { get; set; }
 	}
 }

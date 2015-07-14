@@ -34,6 +34,15 @@ namespace Nest.Watcher.Tests.Integration.Put
 				.Condition(c => c.Always())	
 				.Actions(a => a
 					.Add("test_index", new IndexAction { Index = "test", DocType = "test2" })
+					.Add("test_webhook", new WebhookAction
+					{
+						Method = HttpMethod.Post,
+						Host = "localhost",
+						Port = 8080,
+						Path = "/foo/bar",
+						Headers = new Dictionary<string, string> { { "foo", "bar" } },
+						Body = "\"{{ctx.payload.hits.total}}\""
+					})
 				)
 			);
 
