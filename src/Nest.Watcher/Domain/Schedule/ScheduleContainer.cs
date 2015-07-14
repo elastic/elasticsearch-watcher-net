@@ -28,13 +28,14 @@ namespace Nest
 
 		[JsonProperty("cron")]
 		string Cron { get; set; }
+
+		[JsonProperty("interval")]
+		string Interval { get; set; }
 	}
 
 	public class ScheduleContainer : TriggerBase, IScheduleContainer
 	{
-		public ScheduleContainer()
-		{
-		}
+		public ScheduleContainer() { }
 
 		public ScheduleContainer(ScheduleBase schedule)
 		{
@@ -47,6 +48,7 @@ namespace Nest
 		public IWeeklySchedule Weekly { get; set; }
 		public IYearlySchedule Yearly { get; set; }
 		public string Cron { get; set; }
+		public string Interval { get; set; }
 
 		internal override void ContainIn(ITriggerContainer container)
 		{
@@ -91,6 +93,12 @@ namespace Nest
 		public ScheduleDescriptor Cron(string cron)
 		{
 			this.Self.Cron = cron;
+			return this;
+		}
+
+		public ScheduleDescriptor Interval(string interval)
+		{
+			this.Self.Interval = interval;
 			return this;
 		}
 	}
