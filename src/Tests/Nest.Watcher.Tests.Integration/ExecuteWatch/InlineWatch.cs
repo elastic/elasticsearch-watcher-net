@@ -124,7 +124,8 @@ namespace Nest.Watcher.Tests.Integration.Execute
 						Actions = new Dictionary<string, IAction>
 						{
 							{ "email_admin", new EmailAction {
-								To = "someone@domain.host.com",
+								From = "nest-client@domain.example",
+								To = "someone@domain.host.example",
 								Subject = "404 recently encountered"
 							}}
 						}
@@ -148,7 +149,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			response.WatchRecord.Result.Condition.Met.Should().BeTrue();
 			response.WatchRecord.Result.Actions.Should().NotBeEmpty();
 
-			var emailAction = response.WatchRecord.Result.Actions.Where(a => a.Id == "email_admin").FirstOrDefault();
+			var emailAction = response.WatchRecord.Result.Actions.FirstOrDefault(a => a.Id == "email_admin");
 			emailAction.Should().NotBeNull();
 		}
 	}

@@ -130,6 +130,12 @@ namespace Nest
 	{
 		[JsonProperty("reason")]
 		public string Reason { get; set; }
+
+		[JsonProperty("account")]
+		public string Account { get; set; }
+
+		[JsonProperty("message")]
+		public string Message { get; set; }
 	}
 
 	[JsonObject]

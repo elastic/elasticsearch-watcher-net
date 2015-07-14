@@ -45,23 +45,23 @@ namespace Nest.Watcher.Tests.Unit.Execute
 
 			var expectedRequest = new
 			{
-				alternative_input = new {someKey = "SomeValue"},
-				ignore_condition = false,
-				ignore_throttle = true,
-				record_execution = false,
-				action_modes = new
-				{
-					_all = "force_simulate"
-				},
-				simulated_actions = new [] { "action1", "action2" },
-				trigger_event = new
+				trigger_data = new
 				{
 					schedule = new
 					{
 						scheduled_time = dt,
 						triggered_time = dt
 					}
-				}
+				},
+				ignore_condition = false,
+				ignore_throttle = true,
+				record_execution = false,
+				alternative_input = new {someKey = "SomeValue"},
+				action_modes = new
+				{
+					_all = "force_simulate"
+				},
+				simulated_actions = new [] { "action1", "action2" },
 			};
 
 			var result = this.Client.ExecuteWatch(new ExecuteWatchRequest("my_watch")
@@ -108,23 +108,24 @@ namespace Nest.Watcher.Tests.Unit.Execute
 
 			var expectedRequest = new
 			{
-				alternative_input = new {someKey = "SomeValue"},
-				ignore_condition = false,
-				ignore_throttle = true,
-				record_execution = false,
-				action_modes = new
-				{
-					_all = "force_simulate"
-				},
-				simulated_actions = new [] { "action1", "action2" },
-				trigger_event = new
+				trigger_data = new
 				{
 					schedule = new
 					{
 						scheduled_time = dt,
 						triggered_time = dt
 					}
-				}
+				},
+				ignore_condition = false,
+				record_execution = false,
+				ignore_throttle = true,
+				alternative_input = new {someKey = "SomeValue"},
+				action_modes = new
+				{
+					_all = "force_simulate"
+				},
+				simulated_actions = new [] { "action1", "action2" },
+				
 			};
 
 			this.JsonEquals(expectedRequest, result);
