@@ -38,7 +38,7 @@ namespace CodeGeneration.Watcher.Domain
 					let p = data.p
 					let m = data.m
 					where p.Options != null && p.Options.Any()
-					let name = p.Name.Contains("metric") ?  m + p.Name.ToPascalCase() : p.Name.ToPascalCase()
+					let name = p.Name.Contains("metric") ?  p.Name.ToPascalCase() : p.Name.ToPascalCase()
 					select new EnumDescription
 					{
 						Name = name,

@@ -10,18 +10,13 @@ namespace CodeGeneration.Watcher
 		static void Main(string[] args)
 		{
 			var spec = ApiGenerator.GetRestApiSpec();
-
 			ApiGenerator.GenerateRequestParameters(spec);
-			
 			ApiGenerator.GenerateRequestParametersExtensions(spec);
-			
 			ApiGenerator.GenerateDescriptors(spec);
-			
 			ApiGenerator.GenerateRequests(spec);
-
 			ApiGenerator.GenerateDispatchExtensions(spec);
-
 			ApiGenerator.GenerateLowLevelExtensions(spec);
+			ApiGenerator.GenerateEnums(spec);
 
 			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
 		}

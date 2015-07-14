@@ -9,14 +9,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IExecuteWatchRequest : INamePath<ExecuteWatchRequestParameters>
+	public interface IExecuteWatchRequest : IIdPath<ExecuteWatchRequestParameters>
 	{
 
 		/// <summary>
 		/// This structure will be parsed as a trigger event and used for the watch execution.
 		/// </summary>
-		[JsonProperty("trigger_event")]
-		TriggerEventContainer TriggerEvent { get; set; }
+		[JsonProperty("trigger_data")]
+		TriggerEventContainer TriggerData { get; set; }
 
 		/// <summary>
 		/// If this is set to true the watch execution will use the Always Condition.
@@ -57,18 +57,22 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("simulated_actions")]
 		SimulatedActions SimulatedActions { get; set; }
+
+		[JsonProperty("watch")]
+		IPutWatchRequest Watch { get; set; }
 	}
 
-	public partial class ExecuteWatchRequest : NamePathBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchRequest : IdPathBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
-		public ExecuteWatchRequest(string name) : base(name) { }
+		public ExecuteWatchRequest(string watchId) : base(watchId) { }
+		public ExecuteWatchRequest() : base(null) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo)
 		{
 			ExecuteWatchInfo.Update(pathInfo, this);
 		}
 
-		public TriggerEventContainer TriggerEvent { get; set; }
+		public TriggerEventContainer TriggerData { get; set; }
 
 		public bool? IgnoreCondition { get; set; }
 
@@ -78,9 +82,11 @@ namespace Nest
 
 		public IDictionary<string, object> AlternativeInput { get; set; }
 
-	    public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
+		public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
 
-	    public SimulatedActions SimulatedActions { get; set; }
+		public SimulatedActions SimulatedActions { get; set; }
+
+		public IPutWatchRequest Watch { get; set; }
 	}
 
 	internal static class ExecuteWatchInfo
@@ -88,33 +94,31 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo, IExecuteWatchRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Id = request.Name;
 		}
 	}
 
-
-
 	[DescriptorFor("WatcherExecuteWatch")]
-	public partial class ExecuteWatchDescriptor : NamePathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchDescriptor : IdPathDescriptor<ExecuteWatchDescriptor, ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
-		private IExecuteWatchRequest Self { get { return this; }}
+		private IExecuteWatchRequest Self { get { return this; } }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo)
 		{
 			ExecuteWatchInfo.Update(pathInfo, this);
 		}
 
-		TriggerEventContainer IExecuteWatchRequest.TriggerEvent { get; set; }
+		TriggerEventContainer IExecuteWatchRequest.TriggerData { get; set; }
 		bool? IExecuteWatchRequest.IgnoreCondition { get; set; }
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
 		bool? IExecuteWatchRequest.IgnoreThrottle { get; set; }
 		IDictionary<string, object> IExecuteWatchRequest.AlternativeInput { get; set; }
-	    IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
-	    SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
+		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
+		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
+		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
 
-		public ExecuteWatchDescriptor TriggerEvent(Func<TriggerEventDescriptor, TriggerEventContainer> selector)
+		public ExecuteWatchDescriptor TriggerData(Func<TriggerEventDescriptor, TriggerEventContainer> selector)
 		{
-			Self.TriggerEvent = selector == null ? null : selector(new TriggerEventDescriptor());
+			Self.TriggerData = selector == null ? null : selector(new TriggerEventDescriptor());
 			return this;
 		}
 
@@ -135,7 +139,7 @@ namespace Nest
 			Self.IgnoreThrottle = ignore;
 			return this;
 		}
-		
+
 		public ExecuteWatchDescriptor ActionModes(Func<FluentDictionary<string, ActionExecutionMode>, IDictionary<string, ActionExecutionMode>> selector)
 		{
 			Self.ActionModes = selector == null ? null : selector(new FluentDictionary<string, ActionExecutionMode>());
@@ -154,5 +158,10 @@ namespace Nest
 			return this;
 		}
 
+		public ExecuteWatchDescriptor Watch(Func<PutWatchDescriptor, PutWatchDescriptor> watch)
+		{
+			Self.Watch = watch(new PutWatchDescriptor());
+			return this;
+		}
 	}
 }

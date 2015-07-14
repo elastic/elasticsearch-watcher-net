@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutWatchRequest : INamePath<PutWatchRequestParameters>
+	public interface IPutWatchRequest : IIdPath<PutWatchRequestParameters>
 	{
 		[JsonProperty("metadata")]
 		IDictionary<string, object> Metadata { get; set; }
 
 		[JsonProperty("trigger")]
-		TriggerContainer Trigger { get; set; }
+		ITriggerContainer Trigger { get; set; }
 
 		[JsonProperty("input")]
 		InputContainer Input { get; set; }
@@ -34,13 +34,14 @@ namespace Nest
 		IDictionary<string, IAction> Actions { get; set; }
 	}
 
-	public partial class PutWatchRequest : NamePathBase<PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchRequest : IdPathBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
-		public PutWatchRequest(string id) : base(id) { }
+		public PutWatchRequest(string watchId) : base(watchId) { }
+		public PutWatchRequest() : base(null) { }
 
 		public IDictionary<string, object> Metadata { get; set; }
 
-		public TriggerContainer Trigger { get; set; }
+		public ITriggerContainer Trigger { get; set; }
 
 		public InputContainer Input { get; set; }
 
@@ -63,16 +64,15 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<PutWatchRequestParameters> pathInfo, IPutWatchRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			pathInfo.Id = request.Name;
 		}
 	}
 
 	[DescriptorFor("WatcherPutWatch")]
-	public partial class PutWatchDescriptor : NamePathDescriptor<PutWatchDescriptor, PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchDescriptor : IdPathDescriptor<PutWatchDescriptor, PutWatchRequestParameters>, IPutWatchRequest
 	{
 		private IPutWatchRequest Self { get { return this; } }
 		IDictionary<string, object> IPutWatchRequest.Metadata  { get; set; }
-		TriggerContainer IPutWatchRequest.Trigger  { get; set; }
+		ITriggerContainer IPutWatchRequest.Trigger  { get; set; }
 		InputContainer IPutWatchRequest.Input  { get; set; }
 		string IPutWatchRequest.ThrottlePeriod  { get; set; }
 		ConditionContainer IPutWatchRequest.Condition  { get; set; }
@@ -85,7 +85,7 @@ namespace Nest
 			return this;
 		}
 
-		public PutWatchDescriptor Trigger(Func<TriggerDescriptor, TriggerContainer> triggerSelector)
+		public PutWatchDescriptor Trigger(Func<TriggerDescriptor, ITriggerContainer> triggerSelector)
 		{
 			Self.Trigger = triggerSelector(new TriggerDescriptor());
 			return this;

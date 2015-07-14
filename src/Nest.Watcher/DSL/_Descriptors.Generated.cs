@@ -69,6 +69,14 @@ namespace Nest
 	{
 		
 	
+
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public ExecuteWatchDescriptor Debug(bool debug = true)
+		{
+			this.Request.RequestParameters.Debug(debug);
+			return this;
+		}
+		
 	
 	}
 	

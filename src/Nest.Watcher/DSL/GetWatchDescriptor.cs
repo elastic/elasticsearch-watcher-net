@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetWatchRequest : INamePath<GetWatchRequestParameters>
+	public interface IGetWatchRequest : IIdPath<GetWatchRequestParameters>
 	{
 	}
 
-	public partial class GetWatchRequest : NamePathBase<GetWatchRequestParameters>, IGetWatchRequest
+	public partial class GetWatchRequest : IdPathBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		public GetWatchRequest(string id) : base(id)
 		{
@@ -29,12 +29,11 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<GetWatchRequestParameters> pathInfo, IGetWatchRequest request) 
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			pathInfo.Id = request.Name;
 		}
 	}
 
 	[DescriptorFor("WatcherGetWatch")]
-	public partial class GetWatchDescriptor : NamePathDescriptor<GetWatchDescriptor, GetWatchRequestParameters>, IGetWatchRequest
+	public partial class GetWatchDescriptor : IdPathDescriptor<GetWatchDescriptor, GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetWatchRequestParameters> pathInfo)
 		{

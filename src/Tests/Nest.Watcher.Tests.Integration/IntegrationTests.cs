@@ -7,8 +7,11 @@ using NUnit.Framework;
 
 namespace Nest.Watcher.Tests.Integration
 {
-	public abstract class IntegrationTests
+	public abstract class IntegrationTest
 	{
+		public abstract void Fluent();
+		public abstract void ObjectInitializer();
+
 		protected List<string> _watchIds = new List<string>();
 
 		public IElasticClient Client
@@ -17,7 +20,9 @@ namespace Nest.Watcher.Tests.Integration
 			{
 				var url = Environment.GetEnvironmentVariable("WATCHER_TEST_URI") ?? "http://localhost:9200";
 				var uri = new Uri(url);
-				var settings = new ConnectionSettings(uri).PrettyJson();
+				var settings = new ConnectionSettings(uri)
+					.PrettyJson()
+					.ExposeRawResponse();
 				var client = new ElasticClient(settings);
 				return client;
 			}
@@ -36,7 +41,7 @@ namespace Nest.Watcher.Tests.Integration
 			return id;
 		}
 
-		protected string PutWatch()
+		protected virtual string PutWatch()
 		{
 			var watchId = CreateUniqueWatchId();
 			var response = this.Client.PutWatch(watchId, p => p

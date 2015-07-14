@@ -19,7 +19,6 @@ namespace Nest
 	///</summary>
 	internal static class Dispatcher
 	{
-	
 	@foreach (var kv in model.Endpoints)
 	{
 		var endpoint = kv.Value;
@@ -36,8 +35,10 @@ namespace Nest
 		foreach(var gen in generate)
 		{
 		<text>
-		internal static @Raw(gen.Returns) @(Raw(gen.Name))(this IElasticsearchClient client, ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
+		internal static @Raw(gen.Returns) @(Raw(gen.Name))(this IElasticsearchClient client, ElasticsearchPathInfo<@peek.QueryStringParamName> elasticsearchPathInfo, @if (endpoint.Body != null) {<text> object body, </text>}string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 			@foreach (var methodGroup in endpoint.RawDispatches)
@@ -64,6 +65,10 @@ namespace Nest
 					<text>if (@Raw(string.Join(" && ", dispatch.IfChecks)))
 						return client.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
+                        else
+                        {
+					<text>return client.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>           
+                        }
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)
 					{

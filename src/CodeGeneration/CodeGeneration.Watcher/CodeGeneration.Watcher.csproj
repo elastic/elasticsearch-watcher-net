@@ -55,6 +55,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
     <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\WatcherStatsDescriptorOverrides.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="paket.references" />
+    <None Include="Views\Enums.Generated.cshtml" />
     <None Include="Views\LowLevelExtensions.Generated.cshtml" />
     <None Include="Views\DispatchExtensions.Generated.cshtml" />
     <None Include="Views\RequestParameters.Generated.cshtml" />

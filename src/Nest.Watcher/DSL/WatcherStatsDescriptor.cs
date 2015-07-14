@@ -8,11 +8,11 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters>
+	public interface IWatcherStatsRequest : IOptionalMetricPath<WatcherStatsRequestParameters>
 	{
 	}
 
-	public partial class WatcherStatsRequest : BasePathRequest<WatcherStatsRequestParameters>, IWatcherStatsRequest
+	public partial class WatcherStatsRequest : OptionalMetricPathBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<WatcherStatsRequestParameters> pathInfo)
 		{
@@ -28,7 +28,7 @@ namespace Nest
 		}
 	}
 
-	public partial class WatcherStatsDescriptor : BasePathDescriptor<WatcherStatsDescriptor, WatcherStatsRequestParameters>, IWatcherStatsRequest
+	public partial class WatcherStatsDescriptor : OptionalMetricPathDescriptor<WatcherStatsDescriptor, WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<WatcherStatsRequestParameters> pathInfo)
 		{

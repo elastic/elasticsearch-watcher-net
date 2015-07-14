@@ -45,23 +45,23 @@ namespace Nest.Watcher.Tests.Unit.Execute
 
 			var expectedRequest = new
 			{
-				alternative_input = new {someKey = "SomeValue"},
-				ignore_condition = false,
-				ignore_throttle = true,
-				record_execution = false,
-				action_modes = new
-				{
-					_all = "force_simulate"
-				},
-				simulated_actions = new [] { "action1", "action2" },
-				trigger_event = new
+				trigger_data = new
 				{
 					schedule = new
 					{
 						scheduled_time = dt,
 						triggered_time = dt
 					}
-				}
+				},
+				ignore_condition = false,
+				ignore_throttle = true,
+				record_execution = false,
+				alternative_input = new {someKey = "SomeValue"},
+				action_modes = new
+				{
+					_all = "force_simulate"
+				},
+				simulated_actions = new [] { "action1", "action2" },
 			};
 
 			var result = this.Client.ExecuteWatch(new ExecuteWatchRequest("my_watch")
@@ -70,7 +70,7 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				IgnoreCondition = false,
 				IgnoreThrottle = true,
 				RecordExecution = false,
-				TriggerEvent = new ScheduleTriggerEvent
+				TriggerData = new ScheduleTriggerEvent
 				{
 					ScheduledTime = dt,
 					TriggeredTime = dt,
@@ -96,7 +96,7 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				.IgnoreCondition(false)
 				.IgnoreThrottle()
 				.RecordExecution(false)
-				.TriggerEvent(te=>te
+				.TriggerData(te=>te
 					.Schedule(s=>s
 						.ScheduledTime(dt)
 						.TriggeredTime(dt)
@@ -108,23 +108,24 @@ namespace Nest.Watcher.Tests.Unit.Execute
 
 			var expectedRequest = new
 			{
-				alternative_input = new {someKey = "SomeValue"},
-				ignore_condition = false,
-				ignore_throttle = true,
-				record_execution = false,
-				action_modes = new
-				{
-					_all = "force_simulate"
-				},
-				simulated_actions = new [] { "action1", "action2" },
-				trigger_event = new
+				trigger_data = new
 				{
 					schedule = new
 					{
 						scheduled_time = dt,
 						triggered_time = dt
 					}
-				}
+				},
+				ignore_condition = false,
+				record_execution = false,
+				ignore_throttle = true,
+				alternative_input = new {someKey = "SomeValue"},
+				action_modes = new
+				{
+					_all = "force_simulate"
+				},
+				simulated_actions = new [] { "action1", "action2" },
+				
 			};
 
 			this.JsonEquals(expectedRequest, result);

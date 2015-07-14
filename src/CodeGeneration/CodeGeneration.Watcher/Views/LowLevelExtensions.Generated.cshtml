@@ -59,7 +59,7 @@ namespace Nest
 		}
 		@if (method.Parts.Any())
 		{
-	<text>var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "client.Encoded(" + p.Name +")" )));</text>
+	<text>var url = "@(patchedUrl)".F(@method.FormattedUrlArgs());</text>
 		}
 		else
 		{

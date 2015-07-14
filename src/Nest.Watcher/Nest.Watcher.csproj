@@ -55,8 +55,14 @@
     <Compile Include="Domain\ActionExecution\ActionExecutionState.cs" />
     <Compile Include="Domain\ActionExecution\ExecutionResult.cs" />
     <Compile Include="Domain\Action\Action.cs" />
+    <Compile Include="Domain\Action\ActionType.cs" />
     <Compile Include="Domain\Condition\CompareCondition.cs" />
     <Compile Include="Domain\ActionExecution\ActionExecutionMode.cs" />
+    <Compile Include="Domain\Input\InputType.cs" />
+    <Compile Include="Domain\Enums\ExecutionPhase.cs" />
+    <Compile Include="Domain\Status.cs" />
+    <Compile Include="Domain\Condition\ConditionType.cs" />
+    <Compile Include="Domain\Enums\Enums.Generated.cs" />
     <Compile Include="Domain\Transform\TransformBase.cs" />
     <Compile Include="Domain\Transform\TransformContainer.cs" />
     <Compile Include="Domain\Schedule\ScheduleBase.cs" />
@@ -117,6 +123,9 @@
     <Compile Include="Domain\Trigger\TriggerBase.cs" />
     <Compile Include="DSL\AcknowledgeWatchDescriptor.cs" />
     <Compile Include="DSL\DeleteWatchDescriptor.cs" />
+    <Compile Include="DSL\Paths\OptionalMetricPath.cs" />
+    <Compile Include="DSL\Paths\WatchIdOptionalActionIdPath.cs" />
+    <Compile Include="DSL\Paths\IdPath.cs" />
     <Compile Include="DSL\StopWatcherDescriptor.cs" />
     <Compile Include="DSL\StartWatcherDescriptor.cs" />
     <Compile Include="DSL\RestartWatcherDescriptor.cs" />
@@ -127,9 +136,9 @@
     <Compile Include="DSL\WatcherStatsDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.Generated.cs" />
     <Compile Include="DSL\_Requests.Generated.cs" />
+    <Compile Include="Extensions\ElasticsearchPathInfoExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Serialization\CompareConditionConverter.cs" />
-    <Compile Include="Serialization\ExecutionResultActionConverter.cs" />
     <Compile Include="Serialization\SimpleInputConverter.cs" />
     <Compile Include="Serialization\SimulatedActionsConverter.cs" />
     <Compile Include="Serialization\ActionDictionaryConverter.cs" />
@@ -146,6 +155,7 @@
     <Compile Include="LowLevelExtensions.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Responses\AcknowledgeWatchResponse.cs" />
+    <Compile Include="WatcherPathInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />

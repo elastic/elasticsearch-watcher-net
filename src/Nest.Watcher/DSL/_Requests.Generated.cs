@@ -63,6 +63,14 @@ namespace Nest
 	///</summary>
 	public partial class ExecuteWatchRequest 
 			{
+		
+		///<summary>indicates whether the watch should execute in debug mode</summary>
+		public bool Debug 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("debug"); } 
+			set { this.Request.RequestParameters.AddQueryString("debug", value); }
+		}
+		
 	}
 	
 		

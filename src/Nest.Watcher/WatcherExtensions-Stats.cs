@@ -14,7 +14,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<WatcherStatsDescriptor, WatcherStatsRequestParameters, WatcherStatsResponse>(
 				selector,
-				(p, d) => client.Raw.WatcherStatsDispatch<WatcherStatsResponse>(p)
+				(p, d) => client.Raw.WatcherStatsDispatch<WatcherStatsResponse>(p, null, null, ((IWatcherStatsRequest)d).Metric)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<IWatcherStatsRequest, WatcherStatsRequestParameters, WatcherStatsResponse>(
 				request,
-				(p, d) => client.Raw.WatcherStatsDispatch<WatcherStatsResponse>(p)
+				(p, d) => client.Raw.WatcherStatsDispatch<WatcherStatsResponse>(p, null, null, request.Metric)
 			);
 		}
 
@@ -31,7 +31,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<WatcherStatsDescriptor, WatcherStatsRequestParameters, WatcherStatsResponse, IWatcherStatsResponse>(
 				selector,
-				(p, d) => client.Raw.WatcherStatsDispatchAsync<WatcherStatsResponse>(p)
+				(p, d) => client.Raw.WatcherStatsDispatchAsync<WatcherStatsResponse>(p, null, null, ((IWatcherStatsRequest)d).Metric)
 			); ;
 		}
 
@@ -39,7 +39,7 @@ namespace Nest
 		{
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<IWatcherStatsRequest, WatcherStatsRequestParameters, WatcherStatsResponse, IWatcherStatsResponse>(
 				request,
-				(p, d) => client.Raw.WatcherStatsDispatchAsync<WatcherStatsResponse>(p)
+				(p, d) => client.Raw.WatcherStatsDispatchAsync<WatcherStatsResponse>(p, null, null, request.Metric)
 			); ;
 		}
 	}

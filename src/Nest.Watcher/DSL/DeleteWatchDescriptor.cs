@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public interface IDeleteWatchRequest : INamePath<DeleteWatchRequestParameters>
+	public interface IDeleteWatchRequest : IIdPath<DeleteWatchRequestParameters>
 	{
 	}
 
-	public partial class DeleteWatchRequest : NamePathBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
+	public partial class DeleteWatchRequest : IdPathBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
-		public DeleteWatchRequest(string id) : base(id)
+		public DeleteWatchRequest(string watchId) : base(watchId)
 		{
 		}
 
@@ -26,13 +26,12 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<DeleteWatchRequestParameters> pathInfo, IDeleteWatchRequest request)
 		{
-			pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 		}
 	}
 
 	[DescriptorFor("WatcherDeleteWatch")]
-	public partial class DeleteWatchDescriptor : NamePathDescriptor<DeleteWatchDescriptor, DeleteWatchRequestParameters>, IDeleteWatchRequest
+	public partial class DeleteWatchDescriptor : IdPathDescriptor<DeleteWatchDescriptor, DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteWatchRequestParameters> pathInfo)
 		{

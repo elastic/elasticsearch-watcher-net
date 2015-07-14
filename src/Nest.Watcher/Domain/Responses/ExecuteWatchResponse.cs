@@ -11,24 +11,45 @@ namespace Nest
 {
 	public interface IExecuteWatchResponse : IResponse
 	{
+		[JsonProperty("_id")]
+		string Id { get; set; }
+
+		[JsonProperty("watch_record")]
+		WatchRecord WatchRecord { get; set; }
+	}
+
+	public class WatchRecord
+	{
 		[JsonProperty("watch_id")]
-		string WatchId { get; set; }
+		public string WatchId { get; set; }
 
 		[JsonProperty("state")]
-		ActionExecutionState? State { get; set; }
-
-		[JsonProperty("condition")]
-		ConditionContainer Condition { get; set; }
-
-		[JsonProperty("input")]
-		InputContainer Input { get; set; }
+		public ActionExecutionState? State { get; set; }
 
 		[JsonProperty("trigger_event")]
-		IDictionary<string, ITriggerEventContainer> TriggerEvent { get; set; }
+		public TriggerEventResult TriggerEvent { get; set; }
 
-		[JsonProperty("execution_result")]
-		ExecutionResult ExecutionResult { get; set; }
+		[JsonProperty("condition")]
+		public ConditionContainer Condition { get; set; }
 
+		[JsonProperty("input")]
+		public InputContainer Input { get; set; }
+
+		[JsonProperty("result")]
+		public ExecutionResult Result { get; set; }
+	}
+
+	[JsonObject]
+	public class TriggerEventResult
+	{
+		[JsonProperty("type")]
+		public string Type { get; set; }
+
+		[JsonProperty("triggered_time")]
+		public DateTime? TriggeredTime { get; set; }
+
+		[JsonProperty("manual")]
+		public ITriggerEventContainer Manual { get; set; }
 	}
 
 	public class ExecutionResult
@@ -36,8 +57,11 @@ namespace Nest
 		[JsonProperty("execution_time")]
 		public DateTime? ExecutionTime { get; set; }
 
+		[JsonProperty("execution_duration")]
+		public int? ExecutionDuration { get; set; }
+
 		[JsonProperty("input")]
-		public InputContainer Input { get; set; }
+		public ExecutionResultInput Input { get; set; }
 
 		[JsonProperty("condition")]
 		public ExecutionResultCondition Condition { get; set; }
@@ -47,58 +71,75 @@ namespace Nest
 	}
 
 	[JsonObject]
+	public class ExecutionResultInput
+	{
+		[JsonProperty("type")]
+		public InputType Type { get; set; }
+
+		[JsonProperty("status")]
+		public Status Status { get; set; }
+
+		[JsonProperty("payload")]
+		public Dictionary<string, object> Payload { get; set; }
+	}
+
+	[JsonObject]
 	public class ExecutionResultCondition
 	{
+
+		[JsonProperty("type")]
+		public ConditionType Type { get; set; }
+
+		[JsonProperty("status")]
+		public Status Status { get; set; }
+
 		[JsonProperty("met")]
 		public bool? Met { get; set; }
-
-		[JsonProperty("always")]
-		public IAlwaysCondition Always { get; set; }
-
-		[JsonProperty("never")]
-		public INeverCondition Never { get; set; }
-
-		[JsonProperty("script")]
-		public IScriptCondition Script { get; set; }
 	}
 
 	[JsonObject]
-	[JsonConverter(typeof(ExecutionResultActionConverter))]
 	public class ExecutionResultAction
 	{
-		internal ActionResultContainer _Container = new ActionResultContainer();
-
+		[JsonProperty("id")]
 		public string Id { get; set; }
-		public EmailActionResult Email { get { return _Container.Email; } }
-		public IndexActionResult Index { get { return _Container.Index; } }
-		public WebhookActionResult Webhook { get { return _Container.Webhook; } }
-		public LoggingActionResult Logging { get { return _Container.Logging; } }
-	}
 
-	public class ActionResultContainer
-	{
+		[JsonProperty("type")]
+		public ActionType Type { get; set; }
+
+		[JsonProperty("status")]
+		public Status Status { get; set; }
+
+		[JsonProperty("email")]
 		public EmailActionResult Email { get; set; }
+		
+		[JsonProperty("index")]
 		public IndexActionResult Index { get; set; }
+		
+		[JsonProperty("webhook")]
 		public WebhookActionResult Webhook { get; set; }
+
+		[JsonProperty("logging")]
 		public LoggingActionResult Logging { get; set; }
-	}
 
-	[JsonObject]
-	public abstract class ActionResultBase
-	{
-		[JsonProperty("success")]
-		public bool Success { get; set; }
-	}
-
-	[JsonObject]
-	public class EmailActionResult : ActionResultBase
-	{
 		[JsonProperty("reason")]
 		public string Reason { get; set; }
 	}
 
 	[JsonObject]
-	public class IndexActionResult : ActionResultBase
+	public class EmailActionResult
+	{
+		[JsonProperty("reason")]
+		public string Reason { get; set; }
+
+		[JsonProperty("account")]
+		public string Account { get; set; }
+
+		[JsonProperty("message")]
+		public EmailResult Message { get; set; }
+	}
+
+	[JsonObject]
+	public class IndexActionResult
 	{
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -124,13 +165,38 @@ namespace Nest
 		public int Version { get; set; }
 	}
 
-	public class WebhookActionResult : ActionResultBase
+	public class WebhookActionResult
 	{
-		// TODO
+		[JsonProperty("request")]
+		public WatcherHttpRequestResult Request { get; set; }
+
+		[JsonProperty("response")]
+		public WatcherHttpResponseResult Response { get; set; }
+	}
+
+	public class WatcherHttpRequestResult : WatcherHttpRequest
+	{
+		[JsonProperty("connection_timeout")]
+		public string ConnectionTimeout { get; set; }
+
+		[JsonProperty("read_timeout")]
+		public string ReadTimeout { get; set; }
+	}
+
+	public class WatcherHttpResponseResult 
+	{
+		[JsonProperty("status")]
+		public int StatusCode { get; set; }
+
+		[JsonProperty("headers")]
+		public IDictionary<string, string> Headers { get; set; }
+
+		[JsonProperty("body")]
+		public string Body { get; set; }
 	}
 
 	[JsonObject]
-	public class LoggingActionResult : ActionResultBase
+	public class LoggingActionResult
 	{
 		[JsonProperty("logged_text")]
 		public string LoggedText { get; set; }
@@ -138,12 +204,7 @@ namespace Nest
 
 	public class ExecuteWatchResponse : BaseResponse, IExecuteWatchResponse
 	{
-		public string WatchId { get; set; }
-
-		public ActionExecutionState? State { get; set; }
-		public ConditionContainer Condition { get; set; }
-		public InputContainer Input { get; set; }
-		public IDictionary<string, ITriggerEventContainer> TriggerEvent { get; set; }
-		public ExecutionResult ExecutionResult { get; set; }
+		public string Id { get; set; }
+		public WatchRecord WatchRecord { get; set; }
 	}
 }

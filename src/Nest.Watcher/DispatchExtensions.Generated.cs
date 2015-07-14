@@ -16,52 +16,69 @@ namespace Nest
 	///</summary>
 	internal static class Dispatcher
 	{
-	
 		
-		internal static ElasticsearchResponse<T> WatcherAckWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<AcknowledgeWatchRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherAckWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<AcknowledgeWatchRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
-					//PUT /_watcher/watch/{id}/_ack
-					if (!pathInfo.Id.IsNullOrEmpty())
-						return client.WatcherAckWatch<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					//PUT /_watcher/watch/{watch_id}/{action_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty() && !pathInfo.ActionId.IsNullOrEmpty())
+						return client.WatcherAckWatch<T>(pathInfo.WatchId,pathInfo.ActionId,u => pathInfo.RequestParameters);
+					//PUT /_watcher/watch/{watch_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty())
+						return client.WatcherAckWatch<T>(pathInfo.WatchId,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
-					//POST /_watcher/watch/{id}/_ack
-					if (!pathInfo.Id.IsNullOrEmpty())
-						return client.WatcherAckWatchPost<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					//POST /_watcher/watch/{watch_id}/{action_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty() && !pathInfo.ActionId.IsNullOrEmpty())
+						return client.WatcherAckWatchPost<T>(pathInfo.WatchId,pathInfo.ActionId,u => pathInfo.RequestParameters);
+					//POST /_watcher/watch/{watch_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty())
+						return client.WatcherAckWatchPost<T>(pathInfo.WatchId,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.WatcherAckWatch() into any of the following paths: \r\n - /_watcher/watch/{id}/_ack");
+			throw new DispatchException("Could not dispatch IElasticClient.WatcherAckWatch() into any of the following paths: \r\n - /_watcher/watch/{watch_id}/_ack\r\n - /_watcher/watch/{watch_id}/{action_id}/_ack");
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherAckWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<AcknowledgeWatchRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherAckWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<AcknowledgeWatchRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
-					//PUT /_watcher/watch/{id}/_ack
-					if (!pathInfo.Id.IsNullOrEmpty())
-						return client.WatcherAckWatchAsync<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					//PUT /_watcher/watch/{watch_id}/{action_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty() && !pathInfo.ActionId.IsNullOrEmpty())
+						return client.WatcherAckWatchAsync<T>(pathInfo.WatchId,pathInfo.ActionId,u => pathInfo.RequestParameters);
+					//PUT /_watcher/watch/{watch_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty())
+						return client.WatcherAckWatchAsync<T>(pathInfo.WatchId,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
-					//POST /_watcher/watch/{id}/_ack
-					if (!pathInfo.Id.IsNullOrEmpty())
-						return client.WatcherAckWatchPostAsync<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					//POST /_watcher/watch/{watch_id}/{action_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty() && !pathInfo.ActionId.IsNullOrEmpty())
+						return client.WatcherAckWatchPostAsync<T>(pathInfo.WatchId,pathInfo.ActionId,u => pathInfo.RequestParameters);
+					//POST /_watcher/watch/{watch_id}/_ack
+					if (!pathInfo.WatchId.IsNullOrEmpty())
+						return client.WatcherAckWatchPostAsync<T>(pathInfo.WatchId,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.WatcherAckWatch() into any of the following paths: \r\n - /_watcher/watch/{id}/_ack");
+			throw new DispatchException("Could not dispatch IElasticClient.WatcherAckWatch() into any of the following paths: \r\n - /_watcher/watch/{watch_id}/_ack\r\n - /_watcher/watch/{watch_id}/{action_id}/_ack");
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherDeleteWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<DeleteWatchRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherDeleteWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<DeleteWatchRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
@@ -75,8 +92,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherDeleteWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<DeleteWatchRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherDeleteWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<DeleteWatchRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
@@ -90,50 +109,68 @@ namespace Nest
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherExecuteWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo , object body)
+		internal static ElasticsearchResponse<T> WatcherExecuteWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<ExecuteWatchRequestParameters> elasticsearchPathInfo,  object body, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_watcher/watch/{id}/_execute
 					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
 						return client.WatcherExecuteWatch<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					//PUT /_watcher/watch/_execute
+					if (body != null)
+						return client.WatcherExecuteWatch<T>(body,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_watcher/watch/{id}/_execute
 					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
 						return client.WatcherExecuteWatchPost<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					//POST /_watcher/watch/_execute
+					if (body != null)
+						return client.WatcherExecuteWatchPost<T>(body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.WatcherExecuteWatch() into any of the following paths: \r\n - /_watcher/watch/{id}/_execute");
+			throw new DispatchException("Could not dispatch IElasticClient.WatcherExecuteWatch() into any of the following paths: \r\n - /_watcher/watch/{id}/_execute\r\n - /_watcher/watch/_execute");
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherExecuteWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<ExecuteWatchRequestParameters> pathInfo , object body)
+		internal static Task<ElasticsearchResponse<T>> WatcherExecuteWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<ExecuteWatchRequestParameters> elasticsearchPathInfo,  object body, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_watcher/watch/{id}/_execute
 					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
 						return client.WatcherExecuteWatchAsync<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					//PUT /_watcher/watch/_execute
+					if (body != null)
+						return client.WatcherExecuteWatchAsync<T>(body,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_watcher/watch/{id}/_execute
 					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
 						return client.WatcherExecuteWatchPostAsync<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					//POST /_watcher/watch/_execute
+					if (body != null)
+						return client.WatcherExecuteWatchPostAsync<T>(body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.WatcherExecuteWatch() into any of the following paths: \r\n - /_watcher/watch/{id}/_execute");
+			throw new DispatchException("Could not dispatch IElasticClient.WatcherExecuteWatch() into any of the following paths: \r\n - /_watcher/watch/{id}/_execute\r\n - /_watcher/watch/_execute");
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherGetWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<GetWatchRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherGetWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<GetWatchRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
@@ -147,8 +184,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherGetWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<GetWatchRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherGetWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<GetWatchRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
@@ -162,8 +201,10 @@ namespace Nest
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherInfoDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherInfoRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherInfoDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherInfoRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
@@ -175,8 +216,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherInfoDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherInfoRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherInfoDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherInfoRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
@@ -188,8 +231,10 @@ namespace Nest
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherPutWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<PutWatchRequestParameters> pathInfo , object body)
+		internal static ElasticsearchResponse<T> WatcherPutWatchDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<PutWatchRequestParameters> elasticsearchPathInfo,  object body, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -209,8 +254,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherPutWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<PutWatchRequestParameters> pathInfo , object body)
+		internal static Task<ElasticsearchResponse<T>> WatcherPutWatchDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<PutWatchRequestParameters> elasticsearchPathInfo,  object body, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -230,8 +277,10 @@ namespace Nest
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherRestartDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<RestartWatcherRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherRestartDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<RestartWatcherRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -243,8 +292,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherRestartDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<RestartWatcherRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherRestartDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<RestartWatcherRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -256,8 +307,10 @@ namespace Nest
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherStartDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StartWatcherRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherStartDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StartWatcherRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -269,8 +322,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherStartDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StartWatcherRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherStartDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StartWatcherRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -282,34 +337,46 @@ namespace Nest
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherStatsDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherStatsRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherStatsDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherStatsRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /_watcher/stats/{metric}
+					if (pathInfo.Metric != null)
+						return client.WatcherStats<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
 					//GET /_watcher/stats
-					return client.WatcherStats<T>(u => pathInfo.RequestParameters);
+					return client.WatcherStats<T>(u => pathInfo.RequestParameters);           
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.WatcherStats() into any of the following paths: \r\n - /_watcher/stats");
+			throw new DispatchException("Could not dispatch IElasticClient.WatcherStats() into any of the following paths: \r\n - /_watcher/stats\r\n - /_watcher/stats/{metric}");
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherStatsDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherStatsRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherStatsDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<WatcherStatsRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /_watcher/stats/{metric}
+					if (pathInfo.Metric != null)
+						return client.WatcherStatsAsync<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
 					//GET /_watcher/stats
-					return client.WatcherStatsAsync<T>(u => pathInfo.RequestParameters);
+					return client.WatcherStatsAsync<T>(u => pathInfo.RequestParameters);           
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.WatcherStats() into any of the following paths: \r\n - /_watcher/stats");
+			throw new DispatchException("Could not dispatch IElasticClient.WatcherStats() into any of the following paths: \r\n - /_watcher/stats\r\n - /_watcher/stats/{metric}");
 		}
 		
 		
-		internal static ElasticsearchResponse<T> WatcherStopDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StopWatcherRequestParameters> pathInfo )
+		internal static ElasticsearchResponse<T> WatcherStopDispatch<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StopWatcherRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
@@ -321,8 +388,10 @@ namespace Nest
 		}
 		
 		
-		internal static Task<ElasticsearchResponse<T>> WatcherStopDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StopWatcherRequestParameters> pathInfo )
+		internal static Task<ElasticsearchResponse<T>> WatcherStopDispatchAsync<T>(this IElasticsearchClient client, ElasticsearchPathInfo<StopWatcherRequestParameters> elasticsearchPathInfo, string watchId = null, string actionId = null, Metric metric = Metric.All)
 		{
+			var pathInfo = elasticsearchPathInfo.ToWatcherPathInfo(watchId, actionId, metric);
+
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:

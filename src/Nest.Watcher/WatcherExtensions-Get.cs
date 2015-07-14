@@ -9,10 +9,10 @@ namespace Nest
 {
 	public static partial class WatcherExtensions
 	{
-		public static IGetWatchResponse GetWatch(this IElasticClient client, string id, Func<GetWatchDescriptor, GetWatchDescriptor> selector = null)
+		public static IGetWatchResponse GetWatch(this IElasticClient client, string watchId, Func<GetWatchDescriptor, GetWatchDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new GetWatchDescriptor().Name(id));
+			var descriptor = selector(new GetWatchDescriptor().Id(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).Dispatch<GetWatchDescriptor, GetWatchRequestParameters, GetWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherGetWatchDispatch<GetWatchResponse>(p)
@@ -27,10 +27,10 @@ namespace Nest
 			);
 		}
 
-		public static Task<IGetWatchResponse> GetWatchAsync(this IElasticClient client, string id, Func<GetWatchDescriptor, GetWatchDescriptor> selector = null)
+		public static Task<IGetWatchResponse> GetWatchAsync(this IElasticClient client, string watchId, Func<GetWatchDescriptor, GetWatchDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			var descriptor = selector(new GetWatchDescriptor().Name(id));
+			var descriptor = selector(new GetWatchDescriptor().Id(watchId));
 			return ((IHighLevelToLowLevelDispatcher)client).DispatchAsync<GetWatchDescriptor, GetWatchRequestParameters, GetWatchResponse, IGetWatchResponse>(
 				descriptor,
 				(p, d) => client.Raw.WatcherGetWatchDispatchAsync<GetWatchResponse>(p)

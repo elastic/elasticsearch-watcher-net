@@ -12,7 +12,7 @@
     <head>
         <meta id="CompatabilityMode" http-equiv="X-UA-Compatible" content="IE=edge" />
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href="http://download-codeplex.sec.s-msft.com/css/v21018/i1970183/StyleSheet.ashx" id="MasterCss" rel="stylesheet" type="text/css" />
+        <link href="http://download-codeplex.sec.s-msft.com/css/v21028/i1970183/StyleSheet.ashx" id="MasterCss" rel="stylesheet" type="text/css" />
         <link rel="SHORTCUT ICON" href="http://www.codeplex.com/favicon.ico" />
         <title>DiffPlex - a .NET Diff Generator - License</title>
         
@@ -38,10 +38,14 @@
 
         
             <script type="text/javascript">
-                var appInsights = { queue: [], start: function (n) { function r(n, t) { n[t] = function () { var i = arguments; n.queue.push(function () { n[t].apply(n, i) }) } } var t, i; this.applicationInsightsId = n; this.accountId = null; this.appUserId = null; r(this, "logEvent"); r(this, "logPageView"); t = document.createElement("script"); t.type = "text/javascript"; t.src = "//az416426.vo.msecnd.net/scripts/ai.js"; t.async = !0; i = document.getElementsByTagName("script")[0]; i.parentNode.insertBefore(t, i) } };
-                appInsights.start("f5504185-cb9a-4174-95ba-928e1ac1492c");
-                
-                appInsights.logPageView();
+                var appInsights=window.appInsights||function(config){
+                    function s(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},r=document,f=window,e="script",o=r.createElement(e),i,u;for(o.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",r.getElementsByTagName(e)[0].parentNode.appendChild(o),t.cookie=r.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)s("track"+i.pop());return config.disableExceptionTracking||(i="onerror",s("_"+i),u=f[i],f[i]=function(config,r,f,e,o){var s=u&&u(config,r,f,e,o);return s!==!0&&t["_"+i](config,r,f,e,o),s}),t
+                }({
+                    instrumentationKey:"3a5c29be-06e6-465e-862f-c10a5d93d3a2"
+                });
+    
+                window.appInsights=appInsights;
+                appInsights.trackPageView();
             </script>
         
     <style type="text/css">.SideBar, .SideBarPadding{display:none;}.MainContent{width:auto;}.SiteContentTable{width:100%;}</style>
@@ -110,16 +114,16 @@
     </head>
     
     <body>
-        <script src="http://download-codeplex.sec.s-msft.com/scripts/v21018/i7/ScriptLoader.ashx" type="text/javascript"></script>
+        <script src="http://download-codeplex.sec.s-msft.com/scripts/v21028/i5/ScriptLoader.ashx" type="text/javascript"></script>
         <form id="aspnetForm" autocomplete="off" method="POST" enctype="multipart/form-data">
-            <input name="__RequestVerificationToken" type="hidden" value="cIxeSHjCSNIKnOUn61Th0hkIZMoBFFUSQDKp8b8BlAoMYEt0saWnUGsIxlSNdDbIjVBUbQCw_MPMirECKYh-UCsUK0A9GSiwcu1w0LeaHi7cIfbBT3TZF_2WLMDJbYqwK0sXng2" /><input name="__RequestVerificationToken2" type="hidden" value="__RequestVerificationToken27be84534-2b9e-42d1-8381-3509fefa6813" />
+            <input name="__RequestVerificationToken" type="hidden" value="95TcW6a45qoTxsrvG327--1n0ojnwB7hfr8MiHGTQeHCS12S2SbfVJXOtesewMWQTfotdUnukSXDPfPy4US1Es26cEf9kM-80O4zKs3JpWWs3WC3zqtEhPJRJ8op3crgrpQLpA2" /><input name="__RequestVerificationToken2" type="hidden" value="__RequestVerificationToken2ef093ed8-8fb9-4900-9a16-ef1b4fcb2cb8" />
             
             <div id="UpdateProgressPanel" class="loading_animation" style="display:none;">
                 <div class="row">
                     <h2 class="anim_h2">
                         <span id="UpdateProgressText">Updating...</span>
                         <span id="animatedLoadingIconContainer">
-                            <img id="animatedLoadingIcon" src="http://download-codeplex.sec.s-msft.com/Images/v21018/loading_animation.gif" class="anim_img"/>
+                            <img id="animatedLoadingIcon" src="http://download-codeplex.sec.s-msft.com/Images/v21028/loading_animation.gif" class="anim_img"/>
                         </span>
                     </h2>
                 </div>
@@ -127,7 +131,7 @@
             
             <div style="display:none;">
                 
-                <img id="BlankImage" style="width:0;height:0;" src="http://download-codeplex.sec.s-msft.com/Images/v21018/blank.png" onload="self.logoImageLoaded=true;"/>
+                <img id="BlankImage" style="width:0;height:0;" src="http://download-codeplex.sec.s-msft.com/Images/v21028/blank.png" onload="self.logoImageLoaded=true;"/>
 
                 <script language="javascript" type="text/javascript">
                     var date = new Date();
@@ -137,15 +141,9 @@
 
                     if (timezoneOffsetCookie == null || timezoneOffsetCookie != timezoneOffset) {
                         firstTimeSetTimezoneCookie = true;
-                        document.cookie = "TimezoneOffset=" + timezoneOffset + '; domain=.codeplex.com;expires=Sun, 29 May 2016 08:58:02 UTC';
+                        document.cookie = "TimezoneOffset=" + timezoneOffset + '; domain=.codeplex.com;expires=Wed, 13 Jul 2016 07:56:49 UTC';
                     }
                 </script>
-                
-                
-                    <noscript>
-                        <a href="http://www.omniture.com" title="Web Analytics"><img src="http://msstonojstemp.112.2O7.net/b/ss/msstonojstemp/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" /></a>
-                    </noscript>
-                
             </div>
             
             <div id="header">
@@ -318,7 +316,7 @@ function doProjectSearch() {
                             <li><a href="http://www.codeplex.com/site/legal/terms">Terms of Use</a></li>
                             <li><a href="http://www.codeplex.com/site/legal/conduct">Code of Conduct</a></li>
                             <li><a href="http://developermedia.com/" target="_blank">Advertise With Us</a></li>
-                            <li>Version 5.26.2015.21018</li>
+                            <li>Version 7.7.2015.21028</li>
                         </ul>
                     </div>
                 </div>
