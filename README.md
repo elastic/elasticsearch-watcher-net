@@ -14,7 +14,8 @@ PM> Install-Package Nest.Watcher -IncludePrerelease
 
 | NEST.Watcher | NEST | Watcher |
 | --------------------- | ------------------------ | ------------------------ |
-| 1.0.0-beta1   | 1.5.1 or later | 1.0.0-Beta1 |
+| 1.0.0-beta1   | ≥ 1.5.1 | 1.0.0-Beta1 |
+| 1.0.0-beta2	| ≥ 1.5.1 | 1.0.0
 
 ## Usage
 
