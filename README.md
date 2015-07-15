@@ -2,6 +2,8 @@
 
 Repository for the Elasticsearch Watcher extension library for [NEST](https://github.com/elastic/elasticsearch-net/tree/master/src/Nest#nest-).
 
+[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=c7c303f7-2e2c-48dc-9c01-88975eeac6b2)](https://www.myget.org/)
+
 [Watcher](https://www.elastic.co/products/watcher) is a plugin for Elasticsearch that provides alerting and notifications based on changes in your data. This library extends NEST, allowing you to interface with the Watcher plugin.
 
 ## Installation
