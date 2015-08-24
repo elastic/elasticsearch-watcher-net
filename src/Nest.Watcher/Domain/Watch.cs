@@ -10,6 +10,9 @@ namespace Nest
 	[JsonObject]
 	public class Watch
 	{
+		[JsonProperty("metadata")]
+		public IDictionary<string, object> Metadata { get; internal set; }
+
 		[JsonProperty("input")]
 		public InputContainer Input { get; internal set; }
 

@@ -45,6 +45,7 @@ namespace Nest.Watcher.Tests.Integration
 		{
 			var watchId = CreateUniqueWatchId();
 			var response = this.Client.PutWatch(watchId, p => p
+				.Metadata(m => m.Add("x", "y"))
 				.Trigger(t => t
 					.Schedule(s => s
 						.Hourly(h => h.Minute(0, 5))
