@@ -91,7 +91,7 @@ namespace Nest.Watcher.Tests.Unit.Put
 					{
 						Text = "text",
 						Category = "category",
-						Level = "debug",
+						Level =  LogLevel.Debug,
 						Transform = new ScriptTransform
 						{
 							Inline = "inline"
