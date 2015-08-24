@@ -63,5 +63,44 @@ namespace Nest.Watcher.Tests.Unit.Put
 			this.JsonEquals(expectedRequest, response);
 		}
 
+		[Test]
+		public void LogAction()
+		{
+			var expectedRequest = new
+			{
+				actions = new
+				{
+					logSomething = new
+					{
+						logging = new
+						{
+							text = "text",
+							category = "category",
+							level = "debug",
+							transform = new
+							{
+								script = new { inline = "inline" }
+							}
+						}
+					}
+				}
+			};
+			var response = this.Client.PutWatch("some-watch", p => p
+				.Actions(a => a
+					.Add("logSomething", new LoggingAction
+					{
+						Text = "text",
+						Category = "category",
+						Level =  LogLevel.Debug,
+						Transform = new ScriptTransform
+						{
+							Inline = "inline"
+						}
+					})
+				)
+			);
+			this.JsonEquals(expectedRequest, response);
+		}
+
 	}
 }
