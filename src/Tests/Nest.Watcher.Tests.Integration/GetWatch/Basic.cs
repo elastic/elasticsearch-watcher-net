@@ -39,6 +39,7 @@ namespace Nest.Watcher.Tests.Integration.Get
 			testIndex.Acknowledgement.Timestamp.Should().NotBeNull();
 			testIndex.Acknowledgement.State.Should().Be("awaits_successful_execution");
 			response.Watch.Should().NotBeNull();
+			response.Watch.Metadata.Should().NotBeNull();
 			response.Watch.Trigger.Should().NotBeNull();
 			response.Watch.Trigger.Schedule.Should().NotBeNull();
 			response.Watch.Condition.Should().NotBeNull();
