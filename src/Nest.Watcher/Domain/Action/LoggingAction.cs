@@ -23,7 +23,7 @@ namespace Nest
 	{
 		public string Text { get; set; }
 		public string Category { get; set; }
-		public LogLevel Level { get; set; }
+		public LogLevel? Level { get; set; }
 	}
 
 }
