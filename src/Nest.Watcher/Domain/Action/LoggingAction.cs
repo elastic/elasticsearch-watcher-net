@@ -16,7 +16,7 @@ namespace Nest
 		string Category { get; set; }
 
 		[JsonProperty("level")]
-		LogLevel Level { get; set; }
+		LogLevel? Level { get; set; }
 	}
 
 	public class LoggingAction : Action, ILoggingAction
