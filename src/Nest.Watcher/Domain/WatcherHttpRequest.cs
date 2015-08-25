@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
 	[JsonObject]
+	[JsonConverter(typeof(ReadAsTypeConverter<WatcherHttpRequest>))]
 	public interface IWatcherHttpRequest : INestSerializable
 	{
 		[JsonProperty("scheme")]
