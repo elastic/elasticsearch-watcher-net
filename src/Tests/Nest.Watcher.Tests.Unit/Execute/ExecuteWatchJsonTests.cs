@@ -97,10 +97,8 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				.IgnoreThrottle()
 				.RecordExecution(false)
 				.TriggerData(te=>te
-					.Schedule(s=>s
-						.ScheduledTime(dt)
-						.TriggeredTime(dt)
-					)
+					.ScheduledTime(dt)
+					.TriggeredTime(dt)
 				)
 				.ActionModes(a=>a.Add("_all", ActionExecutionMode.ForceSimulate))
 				.SimulatedActions(SimulatedActions.Some("action1", "action2"))

@@ -11,17 +11,16 @@ namespace Nest.Watcher.Tests.Integration.Execute
 	[TestFixture]
 	public class Basic : IntegrationTest
 	{
+		private readonly DateTime _triggeredDateTime = new DateTime(2015, 05, 05, 20, 58, 02);
+
 		[Test]
 		public override void Fluent()
 		{
 			var watchId = PutWatch();
-			var date = new DateTime(2015, 05, 05, 20, 58, 02);
 			var executeWatch = this.Client.ExecuteWatch(watchId, w => w
 				.TriggerData(te => te
-					.Schedule(tes => tes
-						.ScheduledTime(date)
-						.TriggeredTime(date)
-					)
+					.ScheduledTime(_triggeredDateTime)
+					.TriggeredTime(_triggeredDateTime)
 				)
 				.AlternativeInput(i => i.Add("foo", "bar"))
 				.IgnoreCondition()
@@ -38,14 +37,13 @@ namespace Nest.Watcher.Tests.Integration.Execute
 		public override void ObjectInitializer()
 		{
 			var watchId = PutWatch();
-			var date = new DateTime(2015, 05, 05, 20, 58, 02);
 			var executeWatch = this.Client.ExecuteWatch(new ExecuteWatchRequest(watchId)
 				{
-					TriggerData = new TriggerEventContainer(new ScheduleTriggerEvent
+					TriggerData = new ScheduleTriggerEvent
 					{
-						ScheduledTime = date,
-						TriggeredTime = date
-					}),
+						ScheduledTime = _triggeredDateTime,
+						TriggeredTime = _triggeredDateTime
+                    },
 					AlternativeInput = new Dictionary<string, object>
 					{
 						{ "foo", "bar" }
@@ -68,10 +66,10 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			response.WatchRecord.State.Should().NotBeNull().And.Be(ActionExecutionState.Executed);
 			response.WatchRecord.TriggerEvent.Should().NotBeNull();
 			response.WatchRecord.TriggerEvent.Type.Should().Be("manual");
-			response.WatchRecord.TriggerEvent.TriggeredTime.Should().HaveValue();
+			response.WatchRecord.TriggerEvent.TriggeredTime.Should().Be(_triggeredDateTime);
 			response.WatchRecord.TriggerEvent.Manual.Should().NotBeNull();
 			response.WatchRecord.TriggerEvent.Manual.Schedule.Should().NotBeNull();
-			response.WatchRecord.TriggerEvent.Manual.Schedule.ScheduledTime.Should().HaveValue();
+			response.WatchRecord.TriggerEvent.Manual.Schedule.ScheduledTime.Should().Be(_triggeredDateTime);
 
 			response.WatchRecord.Result.Should().NotBeNull();
 			response.WatchRecord.Result.Condition.Should().NotBeNull();
