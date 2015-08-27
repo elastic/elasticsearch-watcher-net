@@ -16,7 +16,7 @@ namespace Nest
 		/// This structure will be parsed as a trigger event and used for the watch execution.
 		/// </summary>
 		[JsonProperty("trigger_data")]
-		TriggerEventContainer TriggerData { get; set; }
+		IScheduleTriggerEvent TriggerData { get; set; }
 
 		/// <summary>
 		/// If this is set to true the watch execution will use the Always Condition.
@@ -72,7 +72,7 @@ namespace Nest
 			ExecuteWatchInfo.Update(pathInfo, this);
 		}
 
-		public TriggerEventContainer TriggerData { get; set; }
+		public IScheduleTriggerEvent TriggerData { get; set; }
 
 		public bool? IgnoreCondition { get; set; }
 
@@ -107,7 +107,7 @@ namespace Nest
 			ExecuteWatchInfo.Update(pathInfo, this);
 		}
 
-		TriggerEventContainer IExecuteWatchRequest.TriggerData { get; set; }
+		IScheduleTriggerEvent IExecuteWatchRequest.TriggerData { get; set; }
 		bool? IExecuteWatchRequest.IgnoreCondition { get; set; }
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
 		bool? IExecuteWatchRequest.IgnoreThrottle { get; set; }
@@ -116,9 +116,9 @@ namespace Nest
 		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
 		IPutWatchRequest IExecuteWatchRequest.Watch { get; set; }
 
-		public ExecuteWatchDescriptor TriggerData(Func<TriggerEventDescriptor, TriggerEventContainer> selector)
+		public ExecuteWatchDescriptor TriggerData(Func<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent> selector)
 		{
-			Self.TriggerData = selector == null ? null : selector(new TriggerEventDescriptor());
+			Self.TriggerData = selector == null ? null : selector(new ScheduleTriggerEventDescriptor());
 			return this;
 		}
 
