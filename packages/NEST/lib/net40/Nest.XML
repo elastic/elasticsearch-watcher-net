@@ -1778,6 +1778,9 @@
         <member name="M:Nest.ElasticClient.Reindex``1(System.Func{Nest.ReindexDescriptor{``0},Nest.ReindexDescriptor{``0}})">
             <inheritdoc />
         </member>
+        <member name="M:Nest.ElasticClient.Reindex(System.Func{Nest.ReindexDescriptor{Nest.IDocument},Nest.ReindexDescriptor{Nest.IDocument}})">
+            <inheritdoc />
+        </member>
         <member name="M:Nest.ElasticClient.ClusterState(System.Func{Nest.ClusterStateDescriptor,Nest.ClusterStateDescriptor})">
             <inheritdoc />
         </member>
@@ -4763,27 +4766,27 @@
             internal constructor by TypeMappingWriter itself when it recurses, passes seenTypes as safeguard agains maxRecursion
             </summary>
         </member>
-        <member name="M:Nest.Resolvers.Writers.TypeMappingWriter.GetElasticSearchType(Nest.IElasticPropertyAttribute,System.Reflection.PropertyInfo)">
+        <member name="M:Nest.Resolvers.Writers.TypeMappingWriter.GetElasticsearchTypeName(Nest.IElasticPropertyAttribute,System.Reflection.PropertyInfo)">
             <summary>
-            Get the Elastic Search Field Type Related.
+            Gets the Elasticsearch type name for a given ElasticPropertyAttribute.
             </summary>
-            <param name="att">ElasticPropertyAttribute</param>
-            <param name="p">Property Field</param>
-            <returns>String with the type name or null if can not be inferres</returns>
+            <param name="attribute">ElasticPropertyAttribute</param>
+            <param name="propertyInfo">Property field</param>
+            <returns>String containing the type name, or null if can not be inferred.</returns>
         </member>
-        <member name="M:Nest.Resolvers.Writers.TypeMappingWriter.GetElasticSearchTypeFromFieldType(System.Nullable{Nest.FieldType})">
+        <member name="M:Nest.Resolvers.Writers.TypeMappingWriter.GetElasticsearchType(System.Nullable{Nest.FieldType})">
             <summary>
-            Get the Elastic Search Field from a FieldType.
+            Gets the Elasticsearch type name for a given FieldType.
             </summary>
             <param name="fieldType">FieldType</param>
-            <returns>String with the type name or null if can not be inferres</returns>
+            <returns>String containing the type name, or null if can not be inferred.</returns>
         </member>
-        <member name="M:Nest.Resolvers.Writers.TypeMappingWriter.GetFieldTypeFromType(System.Type)">
+        <member name="M:Nest.Resolvers.Writers.TypeMappingWriter.GetFieldType(System.Type)">
             <summary>
-            Inferes the FieldType from the type of the property.
+            Gets the FieldType for a given CLR type.
             </summary>
-            <param name="propertyType">Type of the property</param>
-            <returns>FieldType or null if can not be inferred</returns>
+            <param name="propertyType">CLR type of the property</param>
+            <returns>The FieldType, or null if can not be inferred.</returns>
         </member>
         <member name="T:Nest.PropertyNameMarker">
             <summary>
@@ -13282,6 +13285,12 @@
             </summary>
             <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
         </member>
+        <member name="M:Nest.IElasticClient.Reindex(System.Func{Nest.ReindexDescriptor{Nest.IDocument},Nest.ReindexDescriptor{Nest.IDocument}})">
+            <summary>
+            Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+            </summary>
+            <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
+        </member>
         <member name="M:Nest.IElasticClient.Scroll``1(Nest.IScrollRequest)">
             <summary>
             A search request can be scrolled by specifying the scroll parameter. 
@@ -15013,6 +15022,16 @@
         <member name="F:Nest.FieldType.Long">
             <summary>
             Long type.
+            </summary>
+        </member>
+        <member name="F:Nest.FieldType.Short">
+            <summary>
+            Short type.
+            </summary>
+        </member>
+        <member name="F:Nest.FieldType.Byte">
+            <summary>
+            Byte type.
             </summary>
         </member>
         <member name="F:Nest.FieldType.Float">
