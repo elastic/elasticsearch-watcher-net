@@ -43,7 +43,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					{
 						ScheduledTime = _triggeredDateTime,
 						TriggeredTime = _triggeredDateTime
-                    },
+					},
 					AlternativeInput = new Dictionary<string, object>
 					{
 						{ "foo", "bar" }
@@ -151,7 +151,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 				.Actions(act => act
 					.Add("email_admin", new EmailAction
 					{
-						To = "someone@domain.host.com",
+						To = new [] { "someone@domain.host.com" },
 						Subject = "404 recently encountered"
 					})
 					.Add("index_action", new IndexAction

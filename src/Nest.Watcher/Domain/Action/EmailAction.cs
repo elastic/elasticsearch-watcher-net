@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty("from")]
 		string From { get; set; }
 		[JsonProperty("to")]
-		string To { get; set; }
+		IEnumerable<string> To { get; set; }
 		[JsonProperty("cc")]
 		string Cc { get; set; }
 		[JsonProperty("bcc")]
@@ -45,7 +45,7 @@ namespace Nest
 	{
 		public string Account { get; set; }
 		public string From { get; set; }
-		public string To { get; set; }
+		public IEnumerable<string> To { get; set; }
 		public string Cc { get; set; }
 		public string Bcc { get; set; }
 		public string ReplyTo { get; set; }

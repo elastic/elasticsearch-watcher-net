@@ -64,7 +64,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					.Actions(aas => aas
 						.Add("email_admin", new EmailAction
 						{
-							To = "someone@domain.host.com",
+							To = new [] {"someone@domain.host.com"},
 							Subject = "404 recently encountered"
 						})
 					)
@@ -120,7 +120,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 						{
 							{ "email_admin", new EmailAction {
 								From = "nest-client@domain.example",
-								To = "someone@domain.host.example",
+								To = new [] {"someone@domain.host.example"},
 								Subject = "404 recently encountered"
 							}}
 						}

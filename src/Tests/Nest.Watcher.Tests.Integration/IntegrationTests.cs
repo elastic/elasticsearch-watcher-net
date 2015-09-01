@@ -63,6 +63,7 @@ namespace Nest.Watcher.Tests.Integration
 				.Condition(c => c.Always())
 				.Actions(a => a
 					.Add("test_index", new IndexAction { Index = "test", DocType = "test2" })
+					.Add("test_email", new EmailAction { To = new [] { "someone@domain.host.com"}, Subject = "404 recently encountered" })
 				)
 			);
 			response.IsValid.Should().BeTrue();

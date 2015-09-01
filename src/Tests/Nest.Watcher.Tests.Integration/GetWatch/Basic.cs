@@ -45,7 +45,7 @@ namespace Nest.Watcher.Tests.Integration.Get
 			response.Watch.Condition.Should().NotBeNull();
 			response.Watch.Input.Should().NotBeNull();
 			response.Watch.Actions.Should().NotBeEmpty();
-			response.Watch.Actions.Count().Should().Be(1);
+			response.Watch.Actions.Count().Should().Be(2);
 		}
 	}
 }
