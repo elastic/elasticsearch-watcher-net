@@ -43,7 +43,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					{
 						ScheduledTime = _triggeredDateTime,
 						TriggeredTime = _triggeredDateTime
-                    },
+					},
 					AlternativeInput = new Dictionary<string, object>
 					{
 						{ "foo", "bar" }
@@ -84,6 +84,9 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			inputContainer.Should().NotBeNull();
 			inputContainer.Search.Should().NotBeNull();
 
+			response.WatchRecord.Metadata.Should().NotBeNull();
+			response.WatchRecord.Metadata.Should().Contain("foo", "bar");
+
 			var emailAction = response.WatchRecord.Result.Actions.Where(a => a.Id == "email_admin").FirstOrDefault();
 			emailAction.Should().NotBeNull();
 			emailAction.Type.Should().Be(ActionType.Email);
@@ -117,6 +120,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			var watchId = CreateUniqueWatchId();
 			var putWatch = this.Client.PutWatch(watchId, w => w
 				.Trigger(t => t.Schedule(s => s.Cron("0 0 0 1 * ? 2099")))
+				.Metadata(meta => meta.Add("foo", "bar"))
 				.Input(inp => inp
 					.Search(s => s
 						.Request(r => r
