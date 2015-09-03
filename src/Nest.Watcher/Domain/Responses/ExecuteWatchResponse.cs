@@ -35,6 +35,9 @@ namespace Nest
 		[JsonProperty("input")]
 		public InputContainer Input { get; set; }
 
+		[JsonProperty("metadata")]
+		public IDictionary<string, object> Metadata { get; set; }
+
 		[JsonProperty("result")]
 		public ExecutionResult Result { get; set; }
 	}
