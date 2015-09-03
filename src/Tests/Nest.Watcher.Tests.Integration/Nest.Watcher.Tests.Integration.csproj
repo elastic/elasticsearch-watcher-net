@@ -43,6 +43,7 @@
     <Compile Include="AckWatch\IndividualAction.cs" />
     <Compile Include="DeleteWatch\Basic.cs" />
     <Compile Include="ExecuteWatch\Basic.cs" />
+    <Compile Include="ExecuteWatch\CompareCondition.cs" />
     <Compile Include="ExecuteWatch\InlineWatch.cs" />
     <Compile Include="ExecuteWatch\MinimalBody.cs" />
     <Compile Include="GetWatch\Missing.cs" />
