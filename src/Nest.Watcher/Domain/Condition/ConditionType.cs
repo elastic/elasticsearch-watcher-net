@@ -16,6 +16,8 @@ namespace Nest
 		[EnumMember(Value="never")]
 		Never,
 		[EnumMember(Value="script")]
-		Script
+		Script,
+		[EnumMember(Value = "compare")]
+		Compare
 	}
 }
