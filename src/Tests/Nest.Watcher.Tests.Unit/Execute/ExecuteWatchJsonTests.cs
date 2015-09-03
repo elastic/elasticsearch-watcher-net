@@ -47,11 +47,8 @@ namespace Nest.Watcher.Tests.Unit.Execute
 			{
 				trigger_data = new
 				{
-					schedule = new
-					{
-						scheduled_time = dt,
-						triggered_time = dt
-					}
+					scheduled_time = dt,
+					triggered_time = dt
 				},
 				ignore_condition = false,
 				ignore_throttle = true,
@@ -61,7 +58,7 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				{
 					_all = "force_simulate"
 				},
-				simulated_actions = new [] { "action1", "action2" },
+				simulated_actions = new[] {"action1", "action2"},
 			};
 
 			var result = this.Client.ExecuteWatch(new ExecuteWatchRequest("my_watch")
@@ -108,11 +105,8 @@ namespace Nest.Watcher.Tests.Unit.Execute
 			{
 				trigger_data = new
 				{
-					schedule = new
-					{
-						scheduled_time = dt,
-						triggered_time = dt
-					}
+					scheduled_time = dt,
+					triggered_time = dt
 				},
 				ignore_condition = false,
 				record_execution = false,
@@ -122,8 +116,8 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				{
 					_all = "force_simulate"
 				},
-				simulated_actions = new [] { "action1", "action2" },
-				
+				simulated_actions = new[] {"action1", "action2"},
+
 			};
 
 			this.JsonEquals(expectedRequest, result);
