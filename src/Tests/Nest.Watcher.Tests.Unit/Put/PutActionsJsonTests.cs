@@ -23,7 +23,7 @@ namespace Nest.Watcher.Tests.Unit.Put
 						{
 							account = "account",
 							from = "from",
-							to = "to",
+							to = new [] {"to"},
 							cc = "cc",
 							bcc = "dotnet@test.example",
 							reply_to = "replyto",
@@ -52,7 +52,7 @@ namespace Nest.Watcher.Tests.Unit.Put
 						Priority = EmailPriority.High,
 						ReplyTo = "replyto",
 						Subject = "subject",
-						To = "to",
+						To = new [] {"to"},
 						Transform = new ScriptTransform
 						{
 							Inline = "inline"

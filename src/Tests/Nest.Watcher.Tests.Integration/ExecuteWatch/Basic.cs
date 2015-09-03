@@ -155,7 +155,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 				.Actions(act => act
 					.Add("email_admin", new EmailAction
 					{
-						To = "someone@domain.host.com",
+						To = new [] { "someone@domain.host.com" },
 						Subject = "404 recently encountered"
 					})
 					.Add("index_action", new IndexAction
