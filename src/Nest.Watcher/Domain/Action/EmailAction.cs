@@ -20,7 +20,7 @@ namespace Nest
 		[JsonProperty("bcc")]
 		string Bcc { get; set; }
 		[JsonProperty("reply_to")]
-		string ReplyTo { get; set; }
+		IEnumerable<string> ReplyTo { get; set; }
 		[JsonProperty("subject")]
 		string Subject { get; set; }
 		[JsonProperty("body")]
@@ -48,7 +48,7 @@ namespace Nest
 		public IEnumerable<string> To { get; set; }
 		public string Cc { get; set; }
 		public string Bcc { get; set; }
-		public string ReplyTo { get; set; }
+		public IEnumerable<string> ReplyTo { get; set; }
 		public string Subject { get; set; }
 		public EmailBody Body { get; set; }
 		public EmailPriority? Priority { get; set; }
@@ -76,7 +76,7 @@ namespace Nest
 		public string Bcc { get; set; }
 
 		[JsonProperty("reply_to")]
-		public string ReplyTo { get; set; }
+		public IEnumerable<string> ReplyTo { get; set; }
 
 		[JsonProperty("subject")]
 		public string Subject { get; set; }
