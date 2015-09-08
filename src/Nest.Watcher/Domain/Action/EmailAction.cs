@@ -16,9 +16,9 @@ namespace Nest
 		[JsonProperty("to")]
 		IEnumerable<string> To { get; set; }
 		[JsonProperty("cc")]
-		string Cc { get; set; }
+		IEnumerable<string> Cc { get; set; }
 		[JsonProperty("bcc")]
-		string Bcc { get; set; }
+		IEnumerable<string> Bcc { get; set; }
 		[JsonProperty("reply_to")]
 		IEnumerable<string> ReplyTo { get; set; }
 		[JsonProperty("subject")]
@@ -46,8 +46,8 @@ namespace Nest
 		public string Account { get; set; }
 		public string From { get; set; }
 		public IEnumerable<string> To { get; set; }
-		public string Cc { get; set; }
-		public string Bcc { get; set; }
+		public IEnumerable<string> Cc { get; set; }
+		public IEnumerable<string> Bcc { get; set; }
 		public IEnumerable<string> ReplyTo { get; set; }
 		public string Subject { get; set; }
 		public EmailBody Body { get; set; }
@@ -73,7 +73,7 @@ namespace Nest
 		public IEnumerable<string> Cc { get; set; }
 
 		[JsonProperty("bcc")]
-		public string Bcc { get; set; }
+		public IEnumerable<string> Bcc { get; set; }
 
 		[JsonProperty("reply_to")]
 		public IEnumerable<string> ReplyTo { get; set; }
