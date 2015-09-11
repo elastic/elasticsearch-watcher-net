@@ -42,6 +42,7 @@
     <Compile Include="AckWatch\Basic.cs" />
     <Compile Include="AckWatch\IndividualAction.cs" />
     <Compile Include="DeleteWatch\Basic.cs" />
+    <Compile Include="ExecuteWatch\ThrottledActionResponse.cs" />
     <Compile Include="ExecuteWatch\Basic.cs" />
     <Compile Include="ExecuteWatch\CompareCondition.cs" />
     <Compile Include="ExecuteWatch\InlineWatch.cs" />

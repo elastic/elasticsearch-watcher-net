@@ -16,6 +16,8 @@ namespace Nest
 		[EnumMember(Value = "failure")]
 		Failure,
 		[EnumMember(Value = "simulated")]
-		Simulated
+		Simulated,
+		[EnumMember(Value = "throttled")]
+		Throttled            
 	}
 }
