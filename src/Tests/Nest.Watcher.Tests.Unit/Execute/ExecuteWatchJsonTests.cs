@@ -65,7 +65,6 @@ namespace Nest.Watcher.Tests.Unit.Execute
 			{
 				AlternativeInput = new Dictionary<string, object> {{ "someKey", "SomeValue"}},
 				IgnoreCondition = false,
-				IgnoreThrottle = true,
 				RecordExecution = false,
 				TriggerData = new ScheduleTriggerEvent
 				{
@@ -91,7 +90,6 @@ namespace Nest.Watcher.Tests.Unit.Execute
 			var result = this.Client.ExecuteWatch("my_watch", e=>e
 				.AlternativeInput(a=>a.Add("someKey", "SomeValue"))
 				.IgnoreCondition(false)
-				.IgnoreThrottle()
 				.RecordExecution(false)
 				.TriggerData(te=>te
 					.ScheduledTime(dt)

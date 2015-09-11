@@ -33,12 +33,6 @@ namespace Nest
 		bool? RecordExecution { get; set; }
 
 		/// <summary>
-		/// If this is set to true the watch execution will ignore throttling. 
-		/// </summary>
-		[JsonProperty("ignore_throttle")]
-		bool? IgnoreThrottle { get; set; }
-
-		/// <summary>
 		/// If this structure is present, the watch will not execute it’s own input but 
 		/// will use these fields as a payload instead. 
 		/// </summary>
@@ -78,8 +72,6 @@ namespace Nest
 
 		public bool? RecordExecution { get; set; }
 
-		public bool? IgnoreThrottle { get; set; }
-
 		public IDictionary<string, object> AlternativeInput { get; set; }
 
 		public IDictionary<string, ActionExecutionMode> ActionModes { get; set; }
@@ -110,7 +102,6 @@ namespace Nest
 		IScheduleTriggerEvent IExecuteWatchRequest.TriggerData { get; set; }
 		bool? IExecuteWatchRequest.IgnoreCondition { get; set; }
 		bool? IExecuteWatchRequest.RecordExecution { get; set; }
-		bool? IExecuteWatchRequest.IgnoreThrottle { get; set; }
 		IDictionary<string, object> IExecuteWatchRequest.AlternativeInput { get; set; }
 		IDictionary<string, ActionExecutionMode> IExecuteWatchRequest.ActionModes { get; set; }
 		SimulatedActions IExecuteWatchRequest.SimulatedActions { get; set; }
@@ -131,12 +122,6 @@ namespace Nest
 		public ExecuteWatchDescriptor RecordExecution(bool record = true)
 		{
 			Self.RecordExecution = record;
-			return this;
-		}
-
-		public ExecuteWatchDescriptor IgnoreThrottle(bool ignore = true)
-		{
-			Self.IgnoreThrottle = ignore;
 			return this;
 		}
 

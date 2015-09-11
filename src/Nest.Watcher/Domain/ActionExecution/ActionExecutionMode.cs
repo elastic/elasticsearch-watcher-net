@@ -41,7 +41,7 @@ namespace Nest
 		/// The action will be skipped (it won't be executed nor simulated) 
 		/// - effectively it will be forcefully throttled 
 		/// </summary>
-		[EnumMember(Value = "Skip")]
+		[EnumMember(Value = "skip")]
 		Skip
 	}
 }
