@@ -3,15 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
 	[JsonObject]
-	public interface IWebhookAction : IAction
+	[JsonConverter(typeof(ReadAsTypeConverter<WebhookAction>))]
+	public interface IWebhookAction : IAction, IWatcherHttpRequest
 	{
 	}
 	
-	public class WebhookAction : Action, IWebhookAction, IWatcherHttpRequest
+	public class WebhookAction : Action, IWebhookAction
 	{
 		public ConnectionScheme? Scheme { get; set; }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Watcher.Serialization;
 
@@ -177,6 +178,8 @@ namespace Nest
 		public WatcherHttpResponseResult Response { get; set; }
 	}
 
+	[JsonObject]
+	[JsonConverter(typeof(ReadAsTypeConverter<WatcherHttpRequestResult>))]
 	public class WatcherHttpRequestResult : WatcherHttpRequest
 	{
 		[JsonProperty("connection_timeout")]

@@ -102,5 +102,50 @@ namespace Nest.Watcher.Tests.Unit.Put
 			this.JsonEquals(expectedRequest, response);
 		}
 
+		[Test]
+		public void WebHook()
+		{
+			var expectedRequest = new
+			{
+				actions = new
+				{
+					webhook = new
+					{
+						webhook = new
+						{
+							scheme = "https",
+							host = "host",
+							port = 80,
+							method = "post",
+							path = "/some/path",
+							body = "{ \"foo\": \"bar\" }",
+							transform = new
+							{
+								script = new { inline = "inline" }
+							}
+						}
+					}
+				}
+			};
+			var response = this.Client.PutWatch("some-watch", p => p
+				.Actions(a => a
+					.Add("webhook", new WebhookAction
+					{
+						Scheme = ConnectionScheme.Https,
+						Host = "host",
+						Port = 80,
+						Method = HttpMethod.Post,
+						Path = "/some/path",
+						Body = "{ \"foo\": \"bar\" }",
+						Transform = new ScriptTransform
+						{
+							Inline = "inline"
+						}
+					})
+				)
+			);
+			this.JsonEquals(expectedRequest, response);
+		}
+
 	}
 }
