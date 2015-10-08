@@ -26,6 +26,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 				.IgnoreCondition()
 				.ActionModes(a => a
 					.Add("email_admin", ActionExecutionMode.ForceSimulate)
+					.Add("webhook_action", ActionExecutionMode.ForceSimulate)
 				)
 				.RecordExecution(true)
 			);
@@ -52,7 +53,8 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					RecordExecution = true,
 					ActionModes = new Dictionary<string, ActionExecutionMode>
 					{
-						{ "email_admin" , ActionExecutionMode.ForceSimulate}
+						{ "email_admin" , ActionExecutionMode.ForceSimulate},
+						{ "webhook_action" , ActionExecutionMode.ForceSimulate}
 					},
 				});
 			Assert(executeWatch, watchId);
@@ -78,7 +80,7 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			response.WatchRecord.Result.Condition.Met.Should().BeTrue();
 
 			response.WatchRecord.Result.Actions.Should().NotBeNullOrEmpty();
-			response.WatchRecord.Result.Actions.Count().Should().Be(3);
+			response.WatchRecord.Result.Actions.Count().Should().Be(4);
 
 			var inputContainer = response.WatchRecord.Input as IInputContainer;
 			inputContainer.Should().NotBeNull();
@@ -110,6 +112,12 @@ namespace Nest.Watcher.Tests.Integration.Execute
 			loggingAction.Type.Should().Be(ActionType.Logging);
 			loggingAction.Status.Should().Be(Status.Success);
 			loggingAction.Logging.LoggedText.Should().Be("hello from nest");
+
+			var webhookAction = response.WatchRecord.Result.Actions.Where(a => a.Id == "webhook_action").FirstOrDefault();
+			webhookAction.Should().NotBeNull();
+			webhookAction.Type.Should().Be(ActionType.Webhook);
+			webhookAction.Status.Should().Be(Status.Simulated);
+			webhookAction.Webhook.Should().NotBeNull();
 
 			response.WatchRecord.Result.ExecutionTime.Should().HaveValue();
 		}
@@ -166,6 +174,14 @@ namespace Nest.Watcher.Tests.Integration.Execute
 					.Add("logging_action", new LoggingAction
 					{
 						Text = "hello from nest"
+					})
+					.Add("webhook_action", new WebhookAction
+					{
+						Host = "foo.com",
+						Port = 80,
+						Path = "/bar",
+						Method = HttpMethod.Post,
+						Body = "{}"
 					})
 				)
 			);
