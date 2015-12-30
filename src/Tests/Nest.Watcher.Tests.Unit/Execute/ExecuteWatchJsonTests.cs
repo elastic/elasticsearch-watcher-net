@@ -51,7 +51,6 @@ namespace Nest.Watcher.Tests.Unit.Execute
 					triggered_time = dt
 				},
 				ignore_condition = false,
-				ignore_throttle = true,
 				record_execution = false,
 				alternative_input = new {someKey = "SomeValue"},
 				action_modes = new
@@ -108,7 +107,6 @@ namespace Nest.Watcher.Tests.Unit.Execute
 				},
 				ignore_condition = false,
 				record_execution = false,
-				ignore_throttle = true,
 				alternative_input = new {someKey = "SomeValue"},
 				action_modes = new
 				{
